@@ -3,3 +3,44 @@
 Link.me é uma aplicação Web de gerenciamento e compartilhamento de links no estilo linktr.ee desenvolvida como desafio técnico para uma vaga de estágio.
 
 ---
+
+### :man_technologist: Sobre a aplicação
+
+A aplicação conta com um sistema de autenticação, criação, edição e removão de links, controle de acesso de usuários, e compartilhamento de páginas de links através do nome de usuário.
+
+Este projeto usa as seguintes tecnologias:
+
+- [React.js](https://reactjs.org)
+- [JWT](https://jwt.io)
+- [Bcrypt](https://github.com/dcodeIO/bcrypt.js#readme)
+- [Node.js](https://nodejs.org/en/)
+
+---
+
+### 📁 Instalação
+
+```bash
+  #  clone o repositório
+  git clone https://github.com/mvgoliveira/Link.me
+
+  #  navegue até o repositório clonado
+  cd Link.me
+  
+  #  navegue até as pastas específicas
+  cd frontend
+  cd backend
+
+  #  baixe as dependências
+  yarn [dentro de cada página específica]
+ 
+  #  divirta-se!
+  yarn dev [no frontend]
+  yarn dev [no backend]
+```
+
+É necessário adicionar as variáveis ambientes TOKEN_SECRET [no frontend], MONGO_URL e TOKEN_SECRET [no backend].
+as variáveis TOKEN_SECRET são usados pelo jwt para assinar e verificar os tokens de autenticação e a variável MONGO_URL é usado pelo mongoose para efetuar a conexão com o mongodb.
+
+<hr>
+
+Feito com :hearts: por **[Marcus Oliveira](https://www.linkedin.com/in/marcus-oliveira-3b92011a7/)**.
