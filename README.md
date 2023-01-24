@@ -11,8 +11,7 @@ A aplicação conta com um sistema de autenticação, criação, edição e remo
 Este projeto usa as seguintes tecnologias:
 
 - [React.js](https://reactjs.org)
-- [JWT](https://jwt.io)
-- [Bcrypt](https://github.com/dcodeIO/bcrypt.js#readme)
+- [Vite.js](https://vitejs.dev)
 - [Node.js](https://nodejs.org/en/)
 
 ---
