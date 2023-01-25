@@ -47,7 +47,28 @@ class UserService {
         return user;
     }
 
-    async update(username: string, newUsername?: string, email?: string, password?: string, imageurl?: string) {
+    async update(
+        username: string,
+        newUsername?: string,
+        email?: string,
+        password?: string,
+        imageurl?: string,
+        instagramurl?: string,
+        linkedinurl?: string,
+        facebookurl?: string
+    ) {
+        const schema = yup.object().shape({
+            newUsername: yup.string(),
+            email: yup.string().email("Email is not valid"),
+            password: yup.string().min(8, "Password must be greater than 8 characters"),
+            imageurl: yup.string().min(1, "Image url cannot be empty").url("Image url is not valid"),
+            instagramurl: yup.string().min(1, "Instagram url cannot be empty").url("Instagram url is not valid"),
+            linkedinurl: yup.string().min(1, "LinkedIn url cannot be empty").url("LinkedIn url is not valid"),
+            facebookurl: yup.string().min(1, "Facebook url cannot be empty").url("Facebook url is not valid")
+        });
+
+        await schema.validate({ newUsername, email, password, imageurl, instagramurl, linkedinurl, facebookurl });
+        
         const userExists = await prisma.user.findUnique({
             where: {username: username}
         });
@@ -71,15 +92,31 @@ class UserService {
         
         if (password) {
             const passwordHash = hashSync(password, 10);
-            newData = { username: newUsername, email, password: passwordHash, imageurl};
+            
+            newData = { 
+                username: newUsername,
+                email,
+                password: passwordHash,
+                imageurl,
+                instagramurl,
+                linkedinurl,
+                facebookurl
+            };
         } else {
-            newData = { username: newUsername, email, imageurl};
+            newData = { 
+                username: newUsername,
+                email,
+                imageurl,
+                instagramurl,
+                linkedinurl,
+                facebookurl
+            };
         }
         
         const user = await prisma.user.update({
             where: { username: username },
             data: newData,
-            select: { username: true, email: true, imageurl: true }
+            select: { username: true, email: true, imageurl: true, instagramurl: true, linkedinurl: true, facebookurl: true }
         });
 
         return user;

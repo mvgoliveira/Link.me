@@ -4,6 +4,9 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "imageurl" TEXT,
+    "instagramurl" TEXT,
+    "linkedinurl" TEXT,
+    "facebookurl" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateAt" DATETIME NOT NULL
 );
