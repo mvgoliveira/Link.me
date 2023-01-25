@@ -17,7 +17,7 @@ function Login() {
 						<button type="submit">Fazer login</button>
 					</form>
 
-					<small>ainda não possui uma conta? <a href="">inscreva-se aqui</a></small>
+					<small>ainda não possui uma conta? <a href="/register">inscreva-se aqui</a></small>
 				</article>
 
 			</section>
