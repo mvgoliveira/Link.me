@@ -17,7 +17,7 @@ Este projeto usa as seguintes tecnologias:
 ---
 
 ### 🎨 Prototipação
-- [Link para o projeto no figma](https://www.figma.com/file/chosjspfHPO20qYQBgIZrH/LINK.ME?node-id=0%3A1&t=bJUAjiDouA5f2iUN-1)
+[Link para o projeto no figma](https://www.figma.com/file/chosjspfHPO20qYQBgIZrH/LINK.ME?node-id=0%3A1&t=bJUAjiDouA5f2iUN-1)
 
 ---
 
