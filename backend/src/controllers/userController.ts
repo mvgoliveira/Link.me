@@ -37,12 +37,30 @@ class UserController {
 
     async update(req: Request, res: Response) {
         const {username} = req.params;
-        const {username: newUsername, email, password, imageurl} = req.body;
+        
+        const {
+            username: newUsername,
+            email,
+            password,
+            imageurl,
+            instagramurl,
+            linkedinurl,
+            facebookurl
+        } = req.body;
         
         const userService = new UserService();
 
         try {
-            const user = await userService.update(username, newUsername, email, password, imageurl);
+            const user = await userService.update(
+                username,
+                newUsername,
+                email,
+                password,
+                imageurl,
+                instagramurl,
+                linkedinurl,
+                facebookurl
+            );
 
             return res.json(user)
         } catch (error: any) {
