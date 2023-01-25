@@ -48,6 +48,14 @@ class UserService {
     }
 
     async update(username: string, newUsername?: string, email?: string, password?: string, imageurl?: string) {
+        const schema = yup.object().shape({
+            newUsername: yup.string(),
+            email: yup.string().email("Email is not valid"),
+            password: yup.string().min(8, "password must be greater than 8 characters"),
+        });
+
+        await schema.validate({ newUsername, email, password });
+        
         const userExists = await prisma.user.findUnique({
             where: {username: username}
         });
