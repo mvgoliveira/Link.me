@@ -11,11 +11,14 @@ datasource db {
 }
 
 model User {
-  	username	String		@id
-	email		String		@unique
-	password	String
-	imageurl	String?
-	link		Link[]
+  	username		String		@id
+	email			String		@unique
+	password		String
+	imageurl		String?
+	instagramurl	String?
+	linkedinurl		String?
+	facebookurl		String?
+	link			Link[]
 	
 	createdAt	DateTime	@default(now())
 	updateAt	DateTime	@updatedAt
