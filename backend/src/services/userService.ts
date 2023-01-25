@@ -9,6 +9,10 @@ class UserService {
             select: { username: true, email: true, imageurl: true }
         });
 
+        if (!user) {
+            throw new Error("User does not exists");
+        }
+
         return user;
     }
 
@@ -23,7 +27,7 @@ class UserService {
         await schema.validate({ username, email, password, confirmPassword });
 
         const userExists = await prisma.user.findUnique({
-            where: {username: username}
+            where: {username}
         });
 
         if (userExists) {
@@ -43,13 +47,7 @@ class UserService {
         return user;
     }
 
-    async update(
-        username: string, 
-        newUsername?: string, 
-        email?: string, 
-        password?: string, 
-        imageurl?: string
-    ) {
+    async update(username: string, newUsername?: string, email?: string, password?: string, imageurl?: string) {
         const userExists = await prisma.user.findUnique({
             where: {username: username}
         });
@@ -67,10 +65,20 @@ class UserService {
                 throw new Error("username already in use");
             }
         }
+
+        let newData = {};
+
+        
+        if (password) {
+            const passwordHash = hashSync(password, 10);
+            newData = { username: newUsername, email, password: passwordHash, imageurl};
+        } else {
+            newData = { username: newUsername, email, imageurl};
+        }
         
         const user = await prisma.user.update({
             where: { username: username },
-            data: { username: newUsername, email, password, imageurl},
+            data: newData,
             select: { username: true, email: true, imageurl: true }
         });
 

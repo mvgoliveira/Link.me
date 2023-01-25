@@ -8,7 +8,7 @@ const userController = new UserController();
 
 router.get('/:username', userController.getUserData);
 router.post('/', userController.create);
-router.patch('/:username', userController.update);
+router.patch('/:username', AuthMiddleware, userController.update);
 router.delete('/:username', userController.delete);
 
 export { router as userRouter };

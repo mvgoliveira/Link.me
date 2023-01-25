@@ -13,13 +13,13 @@ function AuthMiddleware (req: Request, res: Response, next: NextFunction) {
     const parts = authHeader.split(' ');
 
     if (parts.length !== 2) {
-        return res.status(401).json({ error: "Token invalid" });
+        return res.status(401).json({ error: "Invalid token" });
     }
 
     const [ scheme, token ] = parts;
 
     if(!/^Bearer$/i.test(scheme)) {
-        return res.status(401).json({ error: "Token malformed" });
+        return res.status(401).json({ error: "Malformed token" });
     }
     
     try {
@@ -31,7 +31,7 @@ function AuthMiddleware (req: Request, res: Response, next: NextFunction) {
 
         return next();
     } catch (error) {
-        return res.status(401).json({ error: "Token invalid" })
+        return res.status(401).json({ error: "Invalid token" })
     }
 }
 
