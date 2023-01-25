@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         display: flex;
         max-width: 100vw;
-        overflow: hidden;
+        overflow-x: hidden;
         line-height: 1;
         background: rgb(3,2,8);
         background: linear-gradient(180deg, #030208 0%, #0F0628 100%);
@@ -56,6 +56,38 @@ export const GlobalStyle = createGlobalStyle`
 
     h1 {
         font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* body::-webkit-scrollbar {
+        width: 10px;
+        height: 50%;
+    }
+
+    body::-webkit-scrollbar-track {
+        background: #000;
+        border: 4px solid transparent;
+        background-clip: content-box;
+    } */
+
+    /* body::-webkit-scrollbar-thumb {
+        background: var(--divider);
+        height: 10px;
+    } */
+
+     /* width */
+    ::-webkit-scrollbar {
+        width: 11px;
+        background: #FAFAFA;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 2px #a5a5a5;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #c4c4c4;
     }
 
     :root {
