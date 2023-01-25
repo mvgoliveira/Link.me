@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { userRouter } from "./routes/userRoutes";
 import { authRouter } from "./routes/authRoutes";
+import { linkRouter } from "./routes/linkRoutes";
 
 const app = express();
 
@@ -13,5 +14,6 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/user', userRouter);
 app.use('/api/login', authRouter);
+app.use('/api/link', linkRouter);
 
 export {app};
