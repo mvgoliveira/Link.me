@@ -26,7 +26,7 @@ function AuthMiddleware (req: Request, res: Response, next: NextFunction) {
         const user: any = jwt.verify(token, process.env.TOKEN_SECRET as string);
 
         if (user.username !== username) {
-            return res.status(401).json({ error: "User does not allowed" });
+            return res.status(401).json({ error: "forbidden: you don't have permission" });
         }
 
         return next();
