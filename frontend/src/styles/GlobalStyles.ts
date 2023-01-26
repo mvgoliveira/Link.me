@@ -83,6 +83,7 @@ export const GlobalStyle = createGlobalStyle`
         --ERROR_MESSAGE_BG: linear-gradient(268.25deg, #862C35 0.72%, #471724 33.5%, #501521 66.29%, #340D1D 99.07%);
         --PRIMARY-FONT-COLOR: #ffffff;
         --SECONDARY-FONT-COLOR: #E2E2E2;
+        --LINK_GLASS_BG: linear-gradient(212.1deg, #2C1D60 0%, #221154 40%, #25135D 60%, #2E1B5F 100%);
 
         --toastify-color-light: #5F32E8;
         --toastify-color-error: #E14353;

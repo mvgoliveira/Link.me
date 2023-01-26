@@ -2,6 +2,7 @@ import { useState } from "react";
 import { api } from "../../services/api";
 import { Container } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
+import { ErrorNotification } from "../../components/ErrorNotification";
 
 function Register() {
 	document.title = 'Login - Link.me';
@@ -38,10 +39,7 @@ function Register() {
 					<span>Crie sua conta para ter acesso gratuito à plataforma</span>
 
 					{ error && (
-						<div className="errorContainer">
-							<span> Resolva o seguinte erro para prosseguir:</span>
-							<p>{error}</p>
-						</div>
+						<ErrorNotification error={error}/>
 					)}
 
 					<form onSubmit={handleRegister}>

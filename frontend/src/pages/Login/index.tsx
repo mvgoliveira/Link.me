@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { Container } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
+import { ErrorNotification } from "../../components/ErrorNotification";
 
 function Login() {
 	document.title = 'Login - Link.me';
@@ -39,10 +40,7 @@ function Login() {
 					<span>Faça login para entrar na sua conta</span>
 
 					{error && (
-						<div className="errorContainer">
-							<span> Resolva o seguinte erro para prosseguir:</span>
-							<p>{error}</p>
-						</div>
+						<ErrorNotification error={error}/>
 					)}
 
 					<form onSubmit={handleSignIn}>
