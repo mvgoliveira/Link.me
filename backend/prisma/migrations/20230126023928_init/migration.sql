@@ -3,10 +3,10 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL PRIMARY KEY,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "imageurl" TEXT,
-    "instagramurl" TEXT,
-    "linkedinurl" TEXT,
-    "facebookurl" TEXT,
+    "image_url" TEXT,
+    "instagram_url" TEXT,
+    "linkedin_url" TEXT,
+    "facebook_url" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateAt" DATETIME NOT NULL
 );

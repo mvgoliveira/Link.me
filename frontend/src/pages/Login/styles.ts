@@ -7,6 +7,7 @@ export const Container = styled.div`
     justify-content: flex-end;
     min-height: 100vh;
     width: 100vw;
+    color: #fff;
 
     background-image: url(${bars});
     background-repeat: no-repeat;
@@ -36,13 +37,35 @@ export const Container = styled.div`
                 margin-top: 60px;
             }
 
-            span {
+            > span {
                 font-weight: 300;
                 font-size: 1.2rem;
                 line-height: 1.5rem;
                 color: #E2E2E2;
                 max-width: 300px;
                 margin-top: 20px;
+            }
+
+            .errorContainer {
+                display: flex;
+                flex-direction: column;
+                padding: 20px;
+                align-items: flex-start;
+                margin-top: 25px;
+
+                background: linear-gradient(268.24deg, rgba(255, 85, 85, 0.51) 0.72%, rgba(255, 78, 78, 0.25) 34.11%, rgba(255, 60, 60, 0.29) 67.51%, rgba(255, 55, 55, 0.17) 100.9%);
+                border: 1px solid var(--ERROR_INPUT_BORDER);
+
+                span {
+                    font-size: .8rem;
+                    font-weight: 600;
+                }
+                
+                p {
+                    font-size: .8rem;
+                    font-weight: 300;
+                    margin-top: 8px;
+                }
             }
             
             form {
@@ -56,6 +79,7 @@ export const Container = styled.div`
                     border: 1.5px solid var(--INPUT_BORDER);
                     padding: 16px 20px;
                     border-radius: 4px;
+                    color: #fff;
                     
                     &::placeholder {
                         font-family: 'Inter', sans-serif;
@@ -75,9 +99,16 @@ export const Container = styled.div`
                     padding: 20px;
                     background: var(--BUTTON_BG);
                     margin-top: 5px;
+                    border: none;
+                    color: #fff;
 
                     &:hover {
                         filter: brightness(0.9)
+                    }
+
+                    &:disabled {
+                        opacity: 0.7;
+                        cursor: not-allowed;
                     }
                 }
             }

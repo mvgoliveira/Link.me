@@ -12,7 +12,7 @@ function Register() {
 					<span>Crie sua conta para ter acesso gratuito à plataforma</span>
 
 					<div className="errorContainer">
-						<span> Resolva o seguintes erros para prosseguir:</span>
+						<span> Resolva o seguinte erro para prosseguir:</span>
 						<p>Nome de usuário não pode conter espaços</p>
 					</div>
 
