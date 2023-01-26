@@ -33,16 +33,20 @@ class UserService {
 
         await schema.validate({ username, email, password, confirmPassword });
 
-        const userExists = await prisma.user.findUnique({
-            where: {username}
+        const userExists = await prisma.user.findFirst({
+            where: {OR: [{username}, {email}]}
         });
 
-        if (userExists) {
-            throw new Error("Usuário já existe");
+        if (userExists && userExists.username === username) {
+            throw new Error("Nome de usuário já está em uso");
+        }
+        
+        if (userExists && userExists.email === email) {
+            throw new Error("Email já está em uso");
         }
         
         if (password !== confirmPassword) {
-            throw new Error("Senhas não são iguais");
+            throw new Error("Senha e confirmação de senha não conferem");
         }
 
         const passwordHash = hashSync(password, 10);
@@ -81,16 +85,20 @@ class UserService {
         });
 
         if (!userExists) {
-            throw new Error("User does not exists");
+            throw new Error("Usuário não existe");
         }
 
         if (newUsername && newUsername !== username) {
-            const usernameExists = await prisma.user.findUnique({
-                where: {username: newUsername}
+            const userExists = await prisma.user.findFirst({
+                where: {OR: [{username}, {email}]}
             });
-            
-            if (usernameExists) {
+    
+            if (userExists && userExists.username === newUsername) {
                 throw new Error("Nome de usuário já está em uso");
+            }
+            
+            if (userExists && userExists.email === email) {
+                throw new Error("Email já está em uso");
             }
         }
 
