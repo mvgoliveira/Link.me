@@ -1,7 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import Cookies from 'js-cookie';
-import jwt from 'jsonwebtoken';
-import { toast } from "react-toastify";
 import { jwtVerify } from "jose";
 
 import { api } from '../services/api'
@@ -23,6 +21,7 @@ type AuthContextType = {
     user: UserType | null;
     error: string | null;
     signIn: (email: string, password: string) => void;
+    handleSetError: (message: string) => void;
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -58,6 +57,10 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
         }
     }, []);
 
+    function handleSetError(message: string | null) {
+        setError(message);    
+    }
+
     async function signIn(email: string, password: string) {
         try {
             const { data: token } = await api.post('/login', {email, password});
@@ -89,7 +92,7 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, signIn, error }}>
+        <AuthContext.Provider value={{ user, signIn, error, handleSetError }}>
             { props.children }
         </AuthContext.Provider>
     )
