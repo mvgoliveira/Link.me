@@ -51,28 +51,11 @@ export const GlobalStyle = createGlobalStyle`
 
     * {
         font-family: 'Inter', sans-serif;
-        color: #fff;
     }
 
     h1 {
         font-family: 'Space Grotesk', sans-serif;
     }
-
-    /* body::-webkit-scrollbar {
-        width: 10px;
-        height: 50%;
-    }
-
-    body::-webkit-scrollbar-track {
-        background: #000;
-        border: 4px solid transparent;
-        background-clip: content-box;
-    } */
-
-    /* body::-webkit-scrollbar-thumb {
-        background: var(--divider);
-        height: 10px;
-    } */
 
      /* width */
     ::-webkit-scrollbar {
@@ -97,5 +80,9 @@ export const GlobalStyle = createGlobalStyle`
         --BUTTON_BG: #5F32E8;
         --GREEN: #03DC69;
         --ERROR_INPUT_BORDER: #75161F;
+
+        --toastify-color-light: #5F32E8;
+        --toastify-color-error: #E14353;
+        --toastify-text-color-light: #fff;
     }
 `

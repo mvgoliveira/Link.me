@@ -7,6 +7,7 @@ export const Container = styled.div`
     justify-content: flex-end;
     min-height: 100vh;
     width: 100vw;
+    color: #fff;
 
     background-image: url(${bars});
     background-repeat: no-repeat;
@@ -97,6 +98,9 @@ export const Container = styled.div`
                     padding: 20px;
                     background: var(--BUTTON_BG);
                     margin-top: 5px;
+                    border: none;
+                    color: #fff;
+
 
                     &:hover {
                         filter: brightness(0.9)
