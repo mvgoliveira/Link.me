@@ -14,10 +14,10 @@ model User {
   	username		String		@id
 	email			String		@unique
 	password		String
-	imageurl		String?
-	instagramurl	String?
-	linkedinurl		String?
-	facebookurl		String?
+	image_url		String?
+	instagram_url	String?
+	linkedin_url		String?
+	facebook_url		String?
 	link			Link[]
 	
 	createdAt	DateTime	@default(now())

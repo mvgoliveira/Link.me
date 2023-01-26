@@ -14,7 +14,14 @@ class SessionService {
 
         const user = await prisma.user.findUnique({
             where: {email},
-            select: {username: true, imageurl: true, password: true}
+            select: {
+                username: true,
+                image_url: true,
+                instagram_url: true,
+                linkedin_url: true,
+                facebook_url: true,
+                password: true, 
+            }
         });
         
         if (!user || !compareSync(password, user.password)) {
@@ -22,7 +29,13 @@ class SessionService {
         }
 
         if (process.env.TOKEN_SECRET) {
-            const token = jwt.sign({username: user.username, imageurl: user.imageurl, email}, process.env.TOKEN_SECRET, {expiresIn: 60 * 60 * 24 * 7}); // 1 Week
+            const token = jwt.sign({
+                username: user.username,
+                email, image_url: user.image_url,
+                instagram_url: user.instagram_url,
+                linkedin_url: user.linkedin_url,
+                facebook_url: user.facebook_url
+            }, process.env.TOKEN_SECRET, {expiresIn: 60 * 60 * 24 * 7}); // 1 Week
             
             return token;
         } else {

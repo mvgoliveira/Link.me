@@ -42,10 +42,10 @@ class UserController {
             username: newUsername,
             email,
             password,
-            imageurl,
-            instagramurl,
-            linkedinurl,
-            facebookurl
+            image_url,
+            instagram_url,
+            linkedin_url,
+            facebook_url
         } = req.body;
         
         const userService = new UserService();
@@ -56,10 +56,10 @@ class UserController {
                 newUsername,
                 email,
                 password,
-                imageurl,
-                instagramurl,
-                linkedinurl,
-                facebookurl
+                image_url,
+                instagram_url,
+                linkedin_url,
+                facebook_url
             );
 
             return res.json(user)
