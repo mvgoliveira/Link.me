@@ -9,7 +9,7 @@ class LinkService {
         });
 
         if (!user) {
-            throw new Error("User does not exists");
+            throw new Error("Usuário não existe");
         }
 
         const links = await prisma.link.findMany({
@@ -23,8 +23,8 @@ class LinkService {
 
     async create(username: string, title: string, url: string) {
         const schema = yup.object().shape({
-            title: yup.string().min(1, "Title cannot be empty"),
-            url: yup.string().url("Url is not valid").min(1, "Url cannot be empty"),
+            title: yup.string().required("Preencha o campo título").min(3, "O título deve ter mais de 3 caracteres"),
+            url: yup.string().required("Preencha o campo url").url("Url não é válida").min(3, "A url deve ter mais de 3 caracteres"),
         });
 
         await schema.validate({ title, url });
@@ -35,7 +35,7 @@ class LinkService {
         });
 
         if (!user) {
-            throw new Error("User does not exists");
+            throw new Error("Usuário não existe");
         }
 
         const link = await prisma.link.create({ 
@@ -47,8 +47,8 @@ class LinkService {
 
     async update(username: string, linkId: string, title: string, url: string) {
         const schema = yup.object().shape({
-            title: yup.string().min(1, "Title cannot be empty"),
-            url: yup.string().min(1, "Url cannot be empty").url("Url is not valid"),
+            title: yup.string().min(3, "O título deve ter mais de 3 caracteres"),
+            url: yup.string().url("Url não é válida").min(3, "A url deve ter mais de 3 caracteres"),
         });
 
         await schema.validate({ title, url });
@@ -58,11 +58,11 @@ class LinkService {
         });
 
         if (!linkExists) {
-            throw new Error("Link does not exists");
+            throw new Error("Link não existe");
         }
 
         if (linkExists.username !== username) {
-            throw new Error("Forbidden: you don't have permission");
+            throw new Error("Acesso negado: você não possui permissão");
         }
 
         const link = await prisma.link.update({
@@ -80,11 +80,11 @@ class LinkService {
         });
 
         if (!linkExists) {
-            throw new Error("Link does not exists");
+            throw new Error("Link não existe");
         }
 
         if (linkExists.username !== username) {
-            throw new Error("Forbidden: you don't have permission");
+            throw new Error("Acesso negado: você não possui permissão");
         }
 
         const link = prisma.link.delete({

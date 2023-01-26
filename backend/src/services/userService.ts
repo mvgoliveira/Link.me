@@ -6,11 +6,18 @@ class UserService {
     async getUserData(username: string) {
         const user = await prisma.user.findUnique({ 
             where: { username },
-            select: { username: true, email: true, image_url: true }
+            select: { 
+                username: true,
+                email: true,
+                image_url: true,
+                instagram_url: true,
+                linkedin_url: true,
+                facebook_url: true 
+            }
         });
 
         if (!user) {
-            throw new Error("User does not exists");
+            throw new Error("Usuário não existe");
         }
 
         return user;
@@ -18,10 +25,10 @@ class UserService {
 
     async create(username: string, email: string, password: string, confirmPassword: string) {
         const schema = yup.object().shape({
-            username: yup.string().required("Name is required"),
-            email: yup.string().email("Email is not valid").required("Email is required"),
-            password: yup.string().min(8, "password must be greater than 8 characters").required("password is required"),
-            confirmPassword: yup.string().min(8, "password must be greater than 8 characters").required("confirm password is required")
+            username: yup.string().required("Preencha o campo nome"),
+            email: yup.string().email("Email não é válido").required("Preencha o campo email"),
+            password: yup.string().min(8, "A senha deve ter mais de 8 caracteres").required("Preencha o campo senha"),
+            confirmPassword: yup.string().min(8, "a senha deve ter mais de 8 caracteres").required("Preencha o campo confirmar senha")
         });
 
         await schema.validate({ username, email, password, confirmPassword });
@@ -31,11 +38,11 @@ class UserService {
         });
 
         if (userExists) {
-            throw new Error("User already exists");
+            throw new Error("Usuário já existe");
         }
         
         if (password !== confirmPassword) {
-            throw new Error("Password Does not match");
+            throw new Error("Senhas não são iguais");
         }
 
         const passwordHash = hashSync(password, 10);
@@ -60,11 +67,11 @@ class UserService {
         const schema = yup.object().shape({
             newUsername: yup.string(),
             email: yup.string().email("Email is not valid"),
-            password: yup.string().min(8, "Password must be greater than 8 characters"),
-            image_url: yup.string().min(1, "Image url cannot be empty").url("Image url is not valid"),
-            instagram_url: yup.string().min(1, "Instagram url cannot be empty").url("Instagram url is not valid"),
-            linkedin_url: yup.string().min(1, "LinkedIn url cannot be empty").url("LinkedIn url is not valid"),
-            facebook_url: yup.string().min(1, "Facebook url cannot be empty").url("Facebook url is not valid")
+            password: yup.string().min(8, "A senha deve ter mais de 8 caracteres"),
+            image_url: yup.string().url("A url da imagem de perfil não é valida"),
+            instagram_url: yup.string().url("A url do Instagram não é valida"),
+            linkedin_url: yup.string().url("A url do LinkedIn não é valida"),
+            facebook_url: yup.string().url("A url do Facebook não é valida")
         });
 
         await schema.validate({ newUsername, email, password, image_url, instagram_url, linkedin_url, facebook_url });
@@ -83,7 +90,7 @@ class UserService {
             });
             
             if (usernameExists) {
-                throw new Error("username already in use");
+                throw new Error("Nome de usuário já está em uso");
             }
         }
 
@@ -135,7 +142,7 @@ class UserService {
         });
 
         if (!userExists) {
-            throw new Error("User does not exists");
+            throw new Error("Usuário não existe");
         }
 
         const deleteUser = await prisma.user.delete({
