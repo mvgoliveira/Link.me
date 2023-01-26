@@ -7,7 +7,7 @@ export const Container = styled.div`
     justify-content: flex-end;
     min-height: 100vh;
     width: 100vw;
-    color: #fff;
+    color: var(--PRIMARY-FONT-COLOR);
 
     background-image: url(${bars});
     background-repeat: no-repeat;
@@ -41,7 +41,7 @@ export const Container = styled.div`
                 font-weight: 300;
                 font-size: 1.2rem;
                 line-height: 1.5rem;
-                color: #E2E2E2;
+                color: var(--SECONDARY-FONT-COLOR);
                 max-width: 300px;
                 margin-top: 20px;
             }
@@ -53,7 +53,7 @@ export const Container = styled.div`
                 align-items: flex-start;
                 margin-top: 25px;
 
-                background: linear-gradient(268.24deg, rgba(255, 85, 85, 0.51) 0.72%, rgba(255, 78, 78, 0.25) 34.11%, rgba(255, 60, 60, 0.29) 67.51%, rgba(255, 55, 55, 0.17) 100.9%);
+                background: var(--ERROR_MESSAGE_BG);
                 border: 1px solid var(--ERROR_INPUT_BORDER);
 
                 span {
@@ -79,7 +79,7 @@ export const Container = styled.div`
                     border: 1.5px solid var(--INPUT_BORDER);
                     padding: 16px 20px;
                     border-radius: 4px;
-                    color: #fff;
+                    color: var(--PRIMARY-FONT-COLOR);
                     
                     &::placeholder {
                         font-family: 'Inter', sans-serif;
@@ -100,7 +100,7 @@ export const Container = styled.div`
                     background: var(--BUTTON_BG);
                     margin-top: 5px;
                     border: none;
-                    color: #fff;
+                    color: var(--PRIMARY-FONT-COLOR);
 
                     &:hover {
                         filter: brightness(0.9)
@@ -114,7 +114,7 @@ export const Container = styled.div`
             }
 
             small {
-                color: #CFCFCF;
+                color: var(--SECONDARY-FONT-COLOR);
                 font-size: 0.8rem;
 
                 a {

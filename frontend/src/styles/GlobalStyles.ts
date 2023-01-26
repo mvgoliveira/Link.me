@@ -80,6 +80,9 @@ export const GlobalStyle = createGlobalStyle`
         --BUTTON_BG: #5F32E8;
         --GREEN: #03DC69;
         --ERROR_INPUT_BORDER: #75161F;
+        --ERROR_MESSAGE_BG: linear-gradient(268.25deg, #862C35 0.72%, #471724 33.5%, #501521 66.29%, #340D1D 99.07%);
+        --PRIMARY-FONT-COLOR: #ffffff;
+        --SECONDARY-FONT-COLOR: #E2E2E2;
 
         --toastify-color-light: #5F32E8;
         --toastify-color-error: #E14353;
