@@ -6,7 +6,7 @@ export const Container = styled.div`
     align-items: center;
     min-height: 100vh;
     width: 100vw;
-    color: var(--PRIMARY-FONT-COLOR);
+    color: var(--PRIMARY_FONT_COLOR);
 
     .profile {
         display: flex;
@@ -41,7 +41,7 @@ export const Container = styled.div`
             padding: 18px;
             border-radius: 4px;
             border: none;
-            color: var(--PRIMARY-FONT-COLOR);
+            color: var(--PRIMARY_FONT_COLOR);
             
             cursor: pointer;
 
@@ -50,7 +50,7 @@ export const Container = styled.div`
             }
             
             svg {
-                color: var(--PRIMARY-FONT-COLOR);
+                color: var(--PRIMARY_FONT_COLOR);
                 height: 20px;
                 width: 20px;
             }
@@ -72,7 +72,7 @@ export const LinksContainer = styled.section`
         background: var(--LINK_GLASS_BG);
         width: 100%;
         border: none;
-        color: var(--PRIMARY-FONT-COLOR);
+        color: var(--PRIMARY_FONT_COLOR);
         
         cursor: pointer;
 
@@ -81,7 +81,7 @@ export const LinksContainer = styled.section`
         }
 
         svg {
-            color: var(--PRIMARY-FONT-COLOR);
+            color: var(--PRIMARY_FONT_COLOR);
             width: 40px;
             height: 40px;
             margin: 25px 0;

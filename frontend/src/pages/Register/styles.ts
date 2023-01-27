@@ -7,7 +7,7 @@ export const Container = styled.div`
     justify-content: flex-end;
     min-height: 100vh;
     width: 100vw;
-    color: var(--PRIMARY-FONT-COLOR);
+    color: var(--PRIMARY_FONT_COLOR);
 
     background-image: url(${bars});
     background-repeat: no-repeat;
@@ -40,7 +40,7 @@ export const Container = styled.div`
             > span {
                 font-weight: 300;
                 font-size: 1.2rem;
-                color: var(--SECONDARY-FONT-COLOR);
+                color: var(--SECONDARY_FONT_COLOR);
                 max-width: 300px;
                 margin-top: 20px;
                 line-height: 1.5rem;
@@ -55,7 +55,7 @@ export const Container = styled.div`
                 input {
                     background: var(--INPUT_BG);
                     border: 1.5px solid var(--INPUT_BORDER);
-                    color: var(--PRIMARY-FONT-COLOR);
+                    color: var(--PRIMARY_FONT_COLOR);
                     padding: 16px 20px;
                     border-radius: 4px;
                     
@@ -78,7 +78,7 @@ export const Container = styled.div`
                     background: var(--BUTTON_BG);
                     margin-top: 5px;
                     border: none;
-                    color: var(--PRIMARY-FONT-COLOR);
+                    color: var(--PRIMARY_FONT_COLOR);
 
 
                     &:hover {
@@ -88,7 +88,7 @@ export const Container = styled.div`
             }
 
             small {
-                color: var(--SECONDARY-FONT-COLOR);
+                color: var(--SECONDARY_FONT_COLOR);
                 font-size: 0.8rem;
 
                 a {

@@ -49,6 +49,8 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
                     facebook_url: verify.payload.facebook_url,
                     linkedin_url: verify.payload.linkedin_url
                 });
+
+                api.defaults.headers.Authorization = `Bearer ${token}`;
             }
         }
 

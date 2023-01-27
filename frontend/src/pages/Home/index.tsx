@@ -68,7 +68,7 @@ function Home() {
             {links && (
                 <LinksContainer>
                     {links.map(link => (
-                        <button type="button" className="link">
+                        <button type="button" className="link" key={link.id} onClick={()=> window.open(`${link.url}`,'_blank')}>
                             <HiLink/>
                             <p>{link.title}</p>
                         </button>
