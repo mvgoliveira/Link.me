@@ -64,6 +64,7 @@ export const LinksContainer = styled.section`
     gap: 20px;
     width: 500px;
     margin-top: 60px;
+    margin-bottom: 100px;
     
     .link {
         display: flex;

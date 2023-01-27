@@ -24,7 +24,6 @@ type LinkType = {
 
 function Home() {
     const { username } = useParams();
-    const navigate = useNavigate();
 
     const [user, setUser] = useState<UserType| null>(null);
     const [links, setLinks] = useState<[LinkType] | null>(null);
