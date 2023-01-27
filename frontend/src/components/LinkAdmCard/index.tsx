@@ -47,25 +47,27 @@ function LinkAdmCard({link, username}: PropsType) {
     }
 
     useEffect(() => {
+        console.log("ON FOCUS:", isTitleInputOnFocus);
+        
         if (isTitleInputOnFocus) {
-            document.getElementById("inputTitle")?.focus();
+            console.log("FOCUS ELEMENT");
+            document.getElementById(`inputTitle#${link.id}`)?.focus();
         }
     }, [isTitleInputOnFocus]);
 
     useEffect(() => {
         if (isUrlInputOnFocus) {
-            document.getElementById("inputUrl")?.focus();
+            document.getElementById(`inputUrl#${link.id}`)?.focus();
         }
     }, [isUrlInputOnFocus]);
     
     return (
         <Container>
             <section className="texts">
-                <div className="inputContainer">
+                <div className="inputContainer" onClick={() => setIsTitleInputOnFocus(true)}>
                     <p 
                         className="linkTitle"
                         style={{ display: `${isTitleInputOnFocus ? "none" : "block"}` }}
-                        onClick={() => setIsTitleInputOnFocus(true)}
                     >
                         {title}
                     </p>
@@ -73,7 +75,7 @@ function LinkAdmCard({link, username}: PropsType) {
                     <input
                         type="text"
                         className="linkTitle"
-                        id="inputTitle"
+                        id={`inputTitle#${link.id}`}
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         onBlur={handleUpdateTitle}
@@ -83,11 +85,10 @@ function LinkAdmCard({link, username}: PropsType) {
                     <FaPen />
                 </div>
                 
-                <div className="inputContainer">
+                <div className="inputContainer" onClick={() => setIsUrlInputOnFocus(true)}>
                     <p 
-                        className="linkUrl"
+                        className={"linkUrl"}
                         style={{ display: `${isUrlInputOnFocus ? "none" : "block"}` }}
-                        onClick={() => setIsUrlInputOnFocus(true)}
                     >
                         {url}
                     </p>
@@ -96,7 +97,7 @@ function LinkAdmCard({link, username}: PropsType) {
                         size={20}
                         type="text"
                         className="linkUrl"
-                        id="inputUrl"
+                        id={`inputUrl#${link.id}`}
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
                         onBlur={handleUpdateUrl}

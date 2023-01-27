@@ -18,6 +18,7 @@ export const Container = styled.div`
         .inputContainer {
             display: flex;
             align-items: center;
+            cursor: text;
             
             :focus-within {
                 svg {
