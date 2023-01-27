@@ -6,8 +6,8 @@ import * as yup from 'yup';
 class SessionService {
     async create (email: string, password: string) {
         const schema = yup.object().shape({
-            email: yup.string().email("Email is not valid").required("Email is required"),
-            password: yup.string().min(8, "password must be greater than 8 characters").required("password is required"),
+            email: yup.string().email("Email não é válido").required("Preencha o campo email"),
+            password: yup.string().required("Preencha o campo senha"),
         });
 
         await schema.validate({email, password});
@@ -25,7 +25,7 @@ class SessionService {
         });
         
         if (!user || !compareSync(password, user.password)) {
-            throw new Error("Incorrect password or email");
+            throw new Error("Email ou senha estão incorretas");
         }
 
         if (process.env.TOKEN_SECRET) {
@@ -39,7 +39,7 @@ class SessionService {
             
             return token;
         } else {
-            throw new Error("Environment Variable is not set");
+            throw new Error("Variáveis de ambiente não estão definidas");
         }
     }
 }

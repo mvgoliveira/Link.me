@@ -74,12 +74,22 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     :root {
+        
+        --BG_CARD: #160B36;
         --INPUT_BG: #2E1A68;
-        --INPUT_PLACEHOLDER_TXT: #9993A8;
+        --SECONDARY_BUTTON_BG: #462B9B;
         --INPUT_BORDER: #472BC5;
         --BUTTON_BG: #5F32E8;
+        --ICON_PURPLE_COLOR: #8157FF;
         --GREEN: #03DC69;
         --ERROR_INPUT_BORDER: #75161F;
+        --ERROR_MESSAGE_BG: linear-gradient(268.25deg, #862C35 0.72%, #471724 33.5%, #501521 66.29%, #340D1D 99.07%);
+        --PRIMARY_FONT_COLOR: #ffffff;
+        --SECONDARY_FONT_COLOR: #E2E2E2;
+        --INPUT_PLACEHOLDER_TXT: #9993A8;
+        
+        --LINK_GLASS_BG: linear-gradient(212.1deg, #2C1D60 0%, #221154 40%, #25135D 60%, #2E1B5F 100%);
+        --HOME_GLASS_BG: linear-gradient(212.1deg, #100927 0%, #140A31 20%, #1E1049 40%, #160B37 60%, #12092F 80%, #190C41 100%);
 
         --toastify-color-light: #5F32E8;
         --toastify-color-error: #E14353;

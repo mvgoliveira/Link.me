@@ -1,7 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import Cookies from 'js-cookie';
-import jwt from 'jsonwebtoken';
-import { toast } from "react-toastify";
 import { jwtVerify } from "jose";
 
 import { api } from '../services/api'
@@ -23,6 +21,7 @@ type AuthContextType = {
     user: UserType | null;
     error: string | null;
     signIn: (email: string, password: string) => void;
+    handleSetError: (message: string) => void;
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -50,6 +49,8 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
                     facebook_url: verify.payload.facebook_url,
                     linkedin_url: verify.payload.linkedin_url
                 });
+
+                api.defaults.headers.Authorization = `Bearer ${token}`;
             }
         }
 
@@ -57,6 +58,10 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
             getTokenInfos(token);
         }
     }, []);
+
+    function handleSetError(message: string | null) {
+        setError(message);    
+    }
 
     async function signIn(email: string, password: string) {
         try {
@@ -89,7 +94,7 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, signIn, error }}>
+        <AuthContext.Provider value={{ user, signIn, error, handleSetError }}>
             { props.children }
         </AuthContext.Provider>
     )

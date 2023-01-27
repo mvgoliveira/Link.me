@@ -1,24 +1,35 @@
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/useAuth";
 import { Container } from "./styles";
+import { Link, useNavigate } from "react-router-dom";
+import { ErrorNotification } from "../../components/ErrorNotification";
 
 function Login() {
 	document.title = 'Login - Link.me';
+	const navigate = useNavigate();
 
 	const [email, setEmail] = useState(""); 
 	const [password, setPassword] = useState(""); 
 
-	const { signIn, error } = useAuth();
+	const { signIn, error, handleSetError, user } = useAuth();
 
 	async function handleSignIn(e: React.FormEvent) {
 		e.preventDefault();
 
-		try {
+		if (email && password) {
 			signIn(email, password);
-		} catch (error: any) {
+		} else {
+			handleSetError("Preencha todos os campos");
 		}
 	}
+
+	useEffect(() => {
+		console.log(user);
+		
+		if(user) {
+			navigate(`/admin/${user.username}`);
+		}
+	}, [user]);
 
 	return (
 		<Container>
@@ -29,10 +40,7 @@ function Login() {
 					<span>Faça login para entrar na sua conta</span>
 
 					{error && (
-						<div className="errorContainer">
-							<span> Resolva o seguinte erro para prosseguir:</span>
-							<p>{error}</p>
-						</div>
+						<ErrorNotification error={error}/>
 					)}
 
 					<form onSubmit={handleSignIn}>
@@ -55,7 +63,7 @@ function Login() {
 						<button type="submit">Fazer login</button>
 					</form>
 
-					<small>ainda não possui uma conta? <a href="/register">inscreva-se aqui</a></small>
+					<small>ainda não possui uma conta? <Link to="/register">inscreva-se aqui</Link></small>
 				</article>
 
 			</section>
