@@ -1,5 +1,5 @@
 import { Header } from "../../components/Header";
-import { Container, LinksContainer } from "./styles";
+import { Container, Menu } from "./styles";
 import {HiPlusSm} from "react-icons/hi";
 import {AiFillEye} from "react-icons/ai";
 import {RiShareFill, RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill} from "react-icons/ri";
@@ -7,6 +7,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { LinkAdmCard } from "../../components/LinkAdmCard";
+import { Input } from "../../components/Input";
 
 type LinkType = {
     id: string;
@@ -26,6 +27,7 @@ function Admin() {
     const [oldLinkedin, setOldLinkedin] = useState<string>("");
     const [oldFacebook, setOldFacebook] = useState<string>("");
 
+    const [isAddNewLinkActive, setIsAddNewLinkActive] = useState<boolean>(false);
     const [newLinkTitle, setNewLinkTitle] = useState<string>("");
     const [newLinkUrl, setNewLinkUrl] = useState<string>("");
 
@@ -83,58 +85,76 @@ function Admin() {
                     <Header username={user.username}/>
         
                     <section className="content">
-                        <LinksContainer>
+                        <article className="linkContainer">
                             {links?.map(link => (
                                 <LinkAdmCard key={link.id} link={link} username={user.username}/>
                             ))}
-                        </LinksContainer>
+                        </article>
         
-                        <article className="menu">
+                        <Menu isAddNewLinkActive={isAddNewLinkActive}>
                             <div className="upper">
-                                <button><HiPlusSm /> Adicionar link</button>
-        
-                                <div className="socialInput" onClick={() => document.getElementById("InstagramInput")?.focus()}>
-                                    <RiInstagramFill />
-                                    <input
+                                <section className="addNewLinkContainer">
+                                    <Input
                                         type="text"
-                                        id="InstagramInput"
-                                        placeholder="https://www.instagram.com/"
-                                        value={instagram}
-                                        onChange={(e) => setInstagram(e.target.value)}
+                                        placeholder="Título"
+                                        value={newLinkTitle}
+                                        onChange={(e) => setNewLinkTitle(e.target.value)}
                                         onBlur={handleUpdateInstagram}
                                     />
-                                </div>
-        
-                                <div className="socialInput" onClick={() => document.getElementById("LinkedInInput")?.focus()}>
-                                    <RiLinkedinFill />
-                                    <input
+
+                                    <Input
                                         type="text"
-                                        id="LinkedInInput"
-                                        placeholder="https://www.linkedin.com/"
-                                        value={linkedin}
-                                        onChange={(e) => setLinkedin(e.target.value)}
-                                        onBlur={handleUpdateLinkedin}
+                                        placeholder="URL"
+                                        value={newLinkUrl}
+                                        onChange={(e) => setNewLinkUrl(e.target.value)}
+                                        onBlur={handleUpdateInstagram}
                                     />
-                                </div>
-        
-                                <div className="socialInput" onClick={() => document.getElementById("FacebookInput")?.focus()}>
-                                    <RiFacebookCircleFill />
-                                    <input
-                                        type="text"
-                                        id="FacebookInput"
-                                        placeholder="https://pt-br.facebook.com/"
-                                        value={facebook}
-                                        onChange={(e) => setFacebook(e.target.value)}
-                                        onBlur={handleUpdateFacebook}
-                                    />
-                                </div>
+
+                                    <article className="addNewLinkButtonsContainer">
+                                        <button onClick={() => setIsAddNewLinkActive(false)}> Cancelar </button>
+                                        <button> Adicionar </button>
+                                    </article>
+                                </section>
+
+
+                                <button onClick={() => setIsAddNewLinkActive(true)}><HiPlusSm /> Adicionar link</button>
+                                
+                                <Input
+                                    Icon={RiInstagramFill}
+                                    type="text"
+                                    id="InstagramInput"
+                                    placeholder="https://www.instagram.com/"
+                                    value={instagram}
+                                    onChange={(e) => setInstagram(e.target.value)}
+                                    onBlur={handleUpdateInstagram}
+                                />
+
+                                <Input
+                                    Icon={RiLinkedinFill}
+                                    type="text"
+                                    id="LinkedInInput"
+                                    placeholder="https://www.linkedin.com/"
+                                    value={linkedin}
+                                    onChange={(e) => setLinkedin(e.target.value)}
+                                    onBlur={handleUpdateLinkedin}
+                                />
+
+                                <Input
+                                    Icon={RiFacebookCircleFill}
+                                    type="text"
+                                    id="FacebookInput"
+                                    placeholder="https://pt-br.facebook.com/"
+                                    value={facebook}
+                                    onChange={(e) => setFacebook(e.target.value)}
+                                    onBlur={handleUpdateFacebook}
+                                />
                             </div>
         
                             <div className="bottom">
                                 <button><AiFillEye/> Visualizar como convidado</button>
                                 <button><RiShareFill /> Compartilhar</button>
                             </div>
-                        </article>
+                        </Menu>
                     </section>
                 </>
             )}
