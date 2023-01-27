@@ -26,6 +26,9 @@ function Admin() {
     const [oldLinkedin, setOldLinkedin] = useState<string>("");
     const [oldFacebook, setOldFacebook] = useState<string>("");
 
+    const [newLinkTitle, setNewLinkTitle] = useState<string>("");
+    const [newLinkUrl, setNewLinkUrl] = useState<string>("");
+
     async function handleUpdateInstagram() {
         try {
             await api.patch(`/user/${user?.username}`, { instagram_url: instagram });

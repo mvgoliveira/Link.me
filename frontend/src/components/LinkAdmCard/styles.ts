@@ -40,6 +40,7 @@ export const Container = styled.div`
 
             p {
                 cursor: text;
+                white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 margin-top: 1px;
