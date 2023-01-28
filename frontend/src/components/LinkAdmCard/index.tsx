@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container } from "./styles";
 import {FaTrash, FaPen} from "react-icons/fa";
 import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 type LinkType = {
     id: string;
@@ -23,6 +24,8 @@ function LinkAdmCard({link, username}: PropsType) {
 
     const [isTitleInputOnFocus, setIsTitleInputOnFocus] = useState(false);
     const [isUrlInputOnFocus, setIsUrlInputOnFocus] = useState(false);
+
+    const [isDeleting, setIsDeleting] = useState(false);
 
     async function handleUpdateTitle() {
         setIsTitleInputOnFocus(false);
@@ -46,11 +49,21 @@ function LinkAdmCard({link, username}: PropsType) {
         }
     }
 
+    async function handleDelete() {
+        try {
+            if (isDeleting) {
+                await api.delete(`/link/${username}/${link.id}`); 
+                setTitle("");
+            } else {
+                setIsDeleting(true);
+            }
+        } catch (error) {
+            toast.error("Não foi possível deletar o Link");
+        }
+    }
+
     useEffect(() => {
-        console.log("ON FOCUS:", isTitleInputOnFocus);
-        
         if (isTitleInputOnFocus) {
-            console.log("FOCUS ELEMENT");
             document.getElementById(`inputTitle#${link.id}`)?.focus();
         }
     }, [isTitleInputOnFocus]);
@@ -61,57 +74,83 @@ function LinkAdmCard({link, username}: PropsType) {
         }
     }, [isUrlInputOnFocus]);
     
-    return (
-        <Container>
-            <section className="texts">
-                <div className="inputContainer" onClick={() => setIsTitleInputOnFocus(true)}>
-                    <p 
-                        className="linkTitle"
-                        style={{ display: `${isTitleInputOnFocus ? "none" : "block"}` }}
-                    >
-                        {title}
-                    </p>
+    if (title) {
+        return (
+            <Container>
+                <section className="texts">
+                    <div className="inputContainer" onClick={() => setIsTitleInputOnFocus(true)}>
+                        {isDeleting ? (
+                            <p className="linkTitle">Deseja deletar esse Link?</p>
+                        ) : (
+                            <>
+                                <p 
+                                    className="linkTitle"
+                                    style={{ display: `${isTitleInputOnFocus ? "none" : "block"}` }}
+                                >
+                                    {title}
+                                </p>
+                                
+                                <input
+                                    type="text"
+                                    className="linkTitle"
+                                    id={`inputTitle#${link.id}`}
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    onBlur={handleUpdateTitle}
+                                    style={{ display: `${isTitleInputOnFocus ? "inline-grid" : "none"}` }}
+                                />
+                                
+                                <FaPen id="titleSvg"/>
+                            </>
+                        )}
+                    </div>
                     
-                    <input
-                        type="text"
-                        className="linkTitle"
-                        id={`inputTitle#${link.id}`}
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        onBlur={handleUpdateTitle}
-                        style={{ display: `${isTitleInputOnFocus ? "inline-grid" : "none"}` }}
-                    />
-                    
-                    <FaPen />
-                </div>
-                
-                <div className="inputContainer" onClick={() => setIsUrlInputOnFocus(true)}>
-                    <p 
-                        className={"linkUrl"}
-                        style={{ display: `${isUrlInputOnFocus ? "none" : "block"}` }}
-                    >
-                        {url}
-                    </p>
+                    <div className="inputContainer" onClick={() => setIsUrlInputOnFocus(true)}>
+                        {isDeleting ? (
+                            <p className={"linkUrl"}> Essa ação é irreversível! </p>
+                        ) : (
+                            <>
+                                <p 
+                                    className={"linkUrl"}
+                                    style={{ display: `${isUrlInputOnFocus ? "none" : "block"}` }}
+                                >
+                                    {url}
+                                </p>
+            
+                                <input
+                                    size={20}
+                                    type="text"
+                                    className="linkUrl"
+                                    id={`inputUrl#${link.id}`}
+                                    value={url}
+                                    onChange={(e) => setUrl(e.target.value)}
+                                    onBlur={handleUpdateUrl}
+                                    style={{ display: `${isUrlInputOnFocus ? "inline-grid" : "none"}` }}
+                                />
+            
+                                <FaPen id="urlSvg"/>
+                            </>
+                        )}
+                    </div>
+    
+                </section>
+    
+                {isDeleting ? (
+                    <section className="buttonsContainer">
+                        <button onClick={() => setIsDeleting(false)}>Não</button>
+                        <button onClick={handleDelete}>Sim</button>
+                    </section>
+                ) : (
+                    <FaTrash onClick={handleDelete}/>
+                )}
+            </Container>
+        )
+    } else {
+        return (
+            <></>
+        )
+    }
 
-                    <input
-                        size={20}
-                        type="text"
-                        className="linkUrl"
-                        id={`inputUrl#${link.id}`}
-                        value={url}
-                        onChange={(e) => setUrl(e.target.value)}
-                        onBlur={handleUpdateUrl}
-                        style={{ display: `${isUrlInputOnFocus ? "inline-grid" : "none"}` }}
-                    />
-
-                    <FaPen />
-                </div>
-
-            </section>
-
-            <FaTrash />
-        </Container>
-    )
 }
 
 export {LinkAdmCard}
