@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { LinkAdmCard } from "../../components/LinkAdmCard";
 import { Input } from "../../components/Input";
+import { ErrorNotification } from "../../components/ErrorNotification";
 
 type LinkType = {
     id: string;
@@ -21,7 +22,7 @@ function Admin() {
     const [instagram, setInstagram] = useState<string>("");
     const [linkedin, setLinkedin] = useState<string>("");
     const [facebook, setFacebook] = useState<string>("");
-    const [links, setLinks] = useState<[LinkType] | null>(null);
+    const [links, setLinks] = useState<LinkType[]>([]);
 
     const [oldInstagram, setOldInstagram] = useState<string>("");
     const [oldLinkedin, setOldLinkedin] = useState<string>("");
@@ -30,6 +31,25 @@ function Admin() {
     const [isAddNewLinkActive, setIsAddNewLinkActive] = useState<boolean>(false);
     const [newLinkTitle, setNewLinkTitle] = useState<string>("");
     const [newLinkUrl, setNewLinkUrl] = useState<string>("");
+    const [error, setError] = useState<string | null>(null);
+
+    async function handleCreateLink(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        try {
+            if (newLinkTitle && newLinkUrl) {
+                const {data} = await api.post<LinkType>(`/link/${user?.username}`, { title: newLinkTitle, url: newLinkUrl });
+
+                setLinks(prevLinks => [data, ...prevLinks]);
+                
+                setIsAddNewLinkActive(false);
+            } else {
+                setError("Preencha todos os campos");
+            }
+        } catch (error: any) {
+            setError(error.response.data.message)
+        }
+    }
 
     async function handleUpdateInstagram() {
         try {
@@ -78,6 +98,14 @@ function Admin() {
         }
     }, [user]);
 
+    useEffect(() => {
+        if (!isAddNewLinkActive) {
+            setNewLinkTitle("");
+            setNewLinkUrl("");
+            setError(null);
+        }
+    }, [isAddNewLinkActive]);
+
     return (
         <Container>
             {user && (
@@ -94,26 +122,32 @@ function Admin() {
                         <Menu isAddNewLinkActive={isAddNewLinkActive}>
                             <div className="upper">
                                 <section className="addNewLinkContainer">
-                                    <Input
-                                        type="text"
-                                        placeholder="Título"
-                                        value={newLinkTitle}
-                                        onChange={(e) => setNewLinkTitle(e.target.value)}
-                                        onBlur={handleUpdateInstagram}
-                                    />
+                                    <form action="" onSubmit={(e) => handleCreateLink(e)}>
+                                        {error && (
+                                            <ErrorNotification error={error}/>
+                                        )}
 
-                                    <Input
-                                        type="text"
-                                        placeholder="URL"
-                                        value={newLinkUrl}
-                                        onChange={(e) => setNewLinkUrl(e.target.value)}
-                                        onBlur={handleUpdateInstagram}
-                                    />
+                                        <Input
+                                            type="text"
+                                            placeholder="Título"
+                                            value={newLinkTitle}
+                                            onChange={(e) => setNewLinkTitle(e.target.value)}
+                                            onBlur={handleUpdateInstagram}
+                                        />
 
-                                    <article className="addNewLinkButtonsContainer">
-                                        <button onClick={() => setIsAddNewLinkActive(false)}> Cancelar </button>
-                                        <button> Adicionar </button>
-                                    </article>
+                                        <Input
+                                            type="text"
+                                            placeholder="URL"
+                                            value={newLinkUrl}
+                                            onChange={(e) => setNewLinkUrl(e.target.value)}
+                                            onBlur={handleUpdateInstagram}
+                                        />
+
+                                        <article className="addNewLinkButtonsContainer">
+                                            <button type="button" onClick={() => setIsAddNewLinkActive(false)}> Cancelar </button>
+                                            <button type="submit"> Adicionar </button>
+                                        </article>
+                                    </form>
                                 </section>
 
 

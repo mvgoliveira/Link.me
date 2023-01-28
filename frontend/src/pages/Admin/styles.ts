@@ -3,10 +3,9 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: start;
     min-height: 100vh;
-    max-width: 100vw;
     width: 100vw;
+    max-width: 1560px;
     color: var(--PRIMARY_FONT_COLOR);
 
     .content {
@@ -24,6 +23,7 @@ export const Container = styled.div`
             display: flex;
             flex-direction: column;
             gap: 20px;
+            margin-bottom: 50px;
         }
     }
 `
@@ -42,6 +42,8 @@ export const Menu = styled.article<MenuPropsType>`
     margin-bottom: 50px;
     padding: 50px 0;
     min-width: 465px;
+    height: 100%;
+    min-height: 521px;
 
     .upper {
         display: flex;
@@ -52,9 +54,14 @@ export const Menu = styled.article<MenuPropsType>`
         
         .addNewLinkContainer {
             display: ${props => props.isAddNewLinkActive ? "flex" : "none"};
-            flex-direction: column;
             width: 100%;
-            gap: 15px;
+            
+            form {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                gap: 15px;
+            }
 
             .addNewLinkButtonsContainer {
                 display: flex;
@@ -153,8 +160,8 @@ export const Menu = styled.article<MenuPropsType>`
             }
 
             svg {
-                width: 15px;
-                height: 15px;
+                width: 18px;
+                height: 18px;
             }
         }
     }
