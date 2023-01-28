@@ -39,7 +39,8 @@ class LinkService {
         }
 
         const link = await prisma.link.create({ 
-            data: {title, url, username}
+            data: {title, url, username},
+            select: {id: true, title: true, url: true}
         });
 
         return link;

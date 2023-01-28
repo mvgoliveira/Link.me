@@ -39,7 +39,7 @@ export const Container = styled.div`
 
             > span {
                 font-weight: 300;
-                font-size: 1.2rem;
+                font-size: 1rem;
                 color: var(--SECONDARY_FONT_COLOR);
                 max-width: 300px;
                 margin-top: 20px;
@@ -68,7 +68,20 @@ export const Container = styled.div`
                     :focus {
                         outline: 1px solid var(--BUTTON_BG);
                     }
+
+                    :autofill {
+                        background-color: tomato !important;
+                    }
+
+                    :-webkit-autofill {
+                        -webkit-box-shadow: 0 0 0 30px var(--INPUT_BG) inset !important;
+                    }
+
+                    :-webkit-autofill{
+                        -webkit-text-fill-color: var(--PRIMARY_FONT_COLOR) !important;
+                    }
                 }
+
 
                 button {
                     border-radius: 4px;

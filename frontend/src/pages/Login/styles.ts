@@ -68,6 +68,14 @@ export const Container = styled.div`
                     :focus {
                         outline: 1px solid var(--BUTTON_BG);
                     }
+
+                    :-webkit-autofill {
+                        -webkit-box-shadow: 0 0 0 30px var(--INPUT_BG) inset !important;
+                    }
+
+                    :-webkit-autofill{
+                        -webkit-text-fill-color: var(--PRIMARY_FONT_COLOR) !important;
+                    }
                 }
 
                 button {

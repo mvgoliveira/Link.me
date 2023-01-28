@@ -7,6 +7,7 @@ export const Container = styled.div`
     background: var(--BG_CARD);
     padding: 20px 30px;
     border-radius: 4px;
+    min-width: 370px;
     
     .texts {
         display: flex;
@@ -40,18 +41,25 @@ export const Container = styled.div`
 
             p {
                 cursor: text;
+                white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 margin-top: 1px;
                 padding: 2px 20px 2px 2px;
                 max-width: 355px;
             }
-
-            svg {
-                width: 12px;
-                height: 12px;
+            
+            #titleSvg {
+                width: 11px;
+                height: 11px;
             }
-        
+
+            #urlSvg {
+                color: var(--SECONDARY_FONT_COLOR);
+                width: 10px;
+                height: 10px;
+            }
+
             .linkTitle {
                 font-size: .9rem;
                 font-weight: 700;
@@ -70,5 +78,30 @@ export const Container = styled.div`
         width: 18px;
         height: 18px;
         color: var(--ICON_PURPLE_COLOR);
+    }
+
+    .buttonsContainer {
+        display: flex;
+        gap: 10px;
+
+        button {
+            cursor: pointer;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            color: #fff;
+
+            &:nth-child(1) {
+                background: var(--SECONDARY_BUTTON_BG);
+            }
+
+            &:nth-child(2) {
+                background: var(--BUTTON_BG);
+            }
+
+            &:hover {
+                filter: brightness(0.92);
+            }
+        }
     }
 `
