@@ -26,6 +26,7 @@ function LinkAdmCard({link, username}: PropsType) {
     const [isUrlInputOnFocus, setIsUrlInputOnFocus] = useState(false);
 
     const [isDeleting, setIsDeleting] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false);
 
     async function handleUpdateTitle() {
         setIsTitleInputOnFocus(false);
@@ -53,7 +54,7 @@ function LinkAdmCard({link, username}: PropsType) {
         try {
             if (isDeleting) {
                 await api.delete(`/link/${username}/${link.id}`); 
-                setTitle("");
+                setIsDeleted(true);
             } else {
                 setIsDeleting(true);
             }
@@ -74,7 +75,7 @@ function LinkAdmCard({link, username}: PropsType) {
         }
     }, [isUrlInputOnFocus]);
     
-    if (title) {
+    if (!isDeleted) {
         return (
             <Container>
                 <section className="texts">

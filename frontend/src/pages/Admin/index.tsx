@@ -1,14 +1,16 @@
-import { Header } from "../../components/Header";
-import { Container, Menu } from "./styles";
-import {HiPlusSm} from "react-icons/hi";
-import {AiFillEye} from "react-icons/ai";
-import {RiShareFill, RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill} from "react-icons/ri";
-import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
+import {RiShareFill, RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill} from "react-icons/ri";
+import {AiFillEye} from "react-icons/ai";
+import {HiPlusSm} from "react-icons/hi";
+import { Container, Menu } from "./styles";
 import { api } from "../../services/api";
-import { LinkAdmCard } from "../../components/LinkAdmCard";
-import { Input } from "../../components/Input";
+import { useAuth } from "../../hooks/useAuth";
 import { ErrorNotification } from "../../components/ErrorNotification";
+import { LinkAdmCard } from "../../components/LinkAdmCard";
+import { Header } from "../../components/Header";
+import { Input } from "../../components/Input";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 type LinkType = {
     id: string;
@@ -17,8 +19,9 @@ type LinkType = {
 }
 
 function Admin() {
+    const navigate = useNavigate();
     const {user} = useAuth();
-    
+
     const [instagram, setInstagram] = useState<string>("");
     const [linkedin, setLinkedin] = useState<string>("");
     const [facebook, setFacebook] = useState<string>("");
@@ -76,6 +79,11 @@ function Admin() {
         } catch (error) {
             setFacebook(oldFacebook);
         }
+    }
+
+    async function handleShare() {
+        navigator.clipboard.writeText(`${window.location.origin}/${user?.username}`);
+        toast.success("Link copiado!");
     }
 
     useEffect(() => {
@@ -185,8 +193,8 @@ function Admin() {
                             </div>
         
                             <div className="bottom">
-                                <button><AiFillEye/> Visualizar como convidado</button>
-                                <button><RiShareFill /> Compartilhar</button>
+                                <button onClick={() => navigate(`/${user?.username}`)}><AiFillEye/> Visualizar como convidado</button>
+                                <button onClick={handleShare}><RiShareFill /> Compartilhar </button>
                             </div>
                         </Menu>
                     </section>
