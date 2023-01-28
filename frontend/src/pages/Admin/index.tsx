@@ -1,14 +1,14 @@
-import { Header } from "../../components/Header";
-import { Container, Menu } from "./styles";
-import {HiPlusSm} from "react-icons/hi";
-import {AiFillEye} from "react-icons/ai";
-import {RiShareFill, RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill} from "react-icons/ri";
-import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
+import {RiShareFill, RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill} from "react-icons/ri";
+import {AiFillEye} from "react-icons/ai";
+import {HiPlusSm} from "react-icons/hi";
+import { Container, Menu } from "./styles";
 import { api } from "../../services/api";
-import { LinkAdmCard } from "../../components/LinkAdmCard";
-import { Input } from "../../components/Input";
+import { useAuth } from "../../hooks/useAuth";
 import { ErrorNotification } from "../../components/ErrorNotification";
+import { LinkAdmCard } from "../../components/LinkAdmCard";
+import { Header } from "../../components/Header";
+import { Input } from "../../components/Input";
 
 type LinkType = {
     id: string;
@@ -18,7 +18,7 @@ type LinkType = {
 
 function Admin() {
     const {user} = useAuth();
-    
+
     const [instagram, setInstagram] = useState<string>("");
     const [linkedin, setLinkedin] = useState<string>("");
     const [facebook, setFacebook] = useState<string>("");
