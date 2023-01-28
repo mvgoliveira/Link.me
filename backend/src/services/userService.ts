@@ -55,7 +55,7 @@ class UserService {
 
         const passwordHash = hashSync(password, 10);
 
-        const image_url = `https://source.boringavatars.com/beam/120/${username}?colors=472BC5,2E1A68,462B9B,5F32E8`;
+        const image_url = `https://api.dicebear.com/5.x/thumbs/png?seed=${username}&backgroundColor=5F32E8&shapeColor=472BC5,2E1A68,462B9B`;
 
         const user = await prisma.user.create({
             data: { username, email, password: passwordHash, image_url }
