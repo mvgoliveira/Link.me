@@ -1,4 +1,3 @@
-import { FC } from "react"
 import { Container } from "./styles"
 
 type propsType = {
