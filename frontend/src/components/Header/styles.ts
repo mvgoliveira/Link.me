@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+type ContainerPropsType = {
+    imageUrl: string;
+    isProfileMenuOpen: boolean;
+}
+
+export const Container = styled.div<ContainerPropsType>`
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,6 +20,7 @@ export const Container = styled.div`
     .profile {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
 
         .texts {
             display: flex;
@@ -41,14 +48,78 @@ export const Container = styled.div`
             }
         }
 
-        .profileImg {
-            width: 55px;
-            height: 55px;
+        #profileImg {
+            display: flex;
+            justify-content: flex-end;
+            cursor: pointer;
+            width: 53px;
+            height: 53px;
 
             margin-left: 12px;
             
-            background: #fff;
-            border-radius: 100%100%;
+            background: var(--BUTTON_BG);
+            border-radius: 100%;
+
+            background-image: ${props => props ? `url(${props.imageUrl})` : ""};
+            background-repeat: no-repeat;
+            background-size: contain;
+
+            border: ${props => props.isProfileMenuOpen ? "2px solid var(--GREEN)" : "2px solid transparent"};
+        }
+
+        .profileMenuContainer{
+            position: absolute;
+            
+        }
+   
+        .profileMenu {
+            display: ${props => props.isProfileMenuOpen ? "flex" : "none"};
+
+            position: absolute;
+
+            padding: 10px 0;
+            border-radius: 4px;
+            top: 118px;
+            background: var(--INPUT_BG);
+
+            .triangleContainer {
+                display: flex;
+                justify-content: flex-end;
+                position: absolute;
+                width: 88%;
+                top: -12px;
+            }
+
+            .triangle {
+                fill: var(--INPUT_BG);
+                stroke: var(--INPUT_BG);
+                stroke-width: 30;
+            }
+            
+            .signOutButton {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                gap: 8px;
+                padding: 10px 35px;
+                background: var(--INPUT_BG);
+                border: 0;
+                color: #fff;
+
+                &:hover {
+                    filter: brightness(1.3);
+                }
+
+                p {
+                    font-size: 0.938rem;
+                }
+
+                svg {
+                    width: 0.938rem;
+                    height: 0.938rem;
+                }
+            }
+    
         }
     }
 `;

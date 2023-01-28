@@ -1,13 +1,23 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+type ContainerPropsType = {
+    isDeleted: boolean;
+}
+
+export const Container = styled.div<ContainerPropsType>`
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: var(--BG_CARD);
-    padding: 20px 30px;
+    padding: ${props => props.isDeleted ? "0" : "20px 30px"};
     border-radius: 4px;
     min-width: 370px;
+    overflow: hidden;
+
+    margin: ${props => props.isDeleted ? "-10px 0" : "0"};
+    max-height: ${props => props.isDeleted ? "0" : "none"};
+    
+    transition: margin 0.15s ease-out;
     
     .texts {
         display: flex;
