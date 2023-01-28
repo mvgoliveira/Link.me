@@ -22,6 +22,7 @@ type AuthContextType = {
     error: string | null;
     signIn: (email: string, password: string) => void;
     handleSetError: (message: string) => void;
+    signOut: () => void;
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -93,8 +94,14 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
         }
     }
 
+    async function signOut() {
+        Cookies.remove('@link.me:token');
+        api.defaults.headers.Authorization = null;
+        setUser(null);
+    }
+
     return (
-        <AuthContext.Provider value={{ user, signIn, error, handleSetError }}>
+        <AuthContext.Provider value={{ user, signIn, error, handleSetError, signOut }}>
             { props.children }
         </AuthContext.Provider>
     )
