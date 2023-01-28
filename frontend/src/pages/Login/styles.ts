@@ -39,7 +39,7 @@ export const Container = styled.div`
 
             > span {
                 font-weight: 300;
-                font-size: 1.2rem;
+                font-size: 1rem;
                 line-height: 1.5rem;
                 color: var(--SECONDARY_FONT_COLOR);
                 max-width: 300px;

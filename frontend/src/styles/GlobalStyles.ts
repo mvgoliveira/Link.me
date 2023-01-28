@@ -92,7 +92,7 @@ export const GlobalStyle = createGlobalStyle`
         --LINK_GLASS_BG: linear-gradient(212.1deg, #2C1D60 0%, #221154 40%, #25135D 60%, #2E1B5F 100%);
         --HOME_GLASS_BG: linear-gradient(212.1deg, #100927 0%, #140A31 20%, #1E1049 40%, #160B37 60%, #12092F 80%, #190C41 100%);
 
-        --toastify-color-light: #5F32E8;
+        --toastify-color-light: #221154;
         --toastify-color-error: #E14353;
         --toastify-text-color-light: #fff;
     }
