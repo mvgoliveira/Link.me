@@ -27,6 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         display: flex;
+        justify-content: center;
         max-width: 100vw;
         overflow-x: hidden;
         line-height: 1;
