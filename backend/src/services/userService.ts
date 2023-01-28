@@ -33,6 +33,10 @@ class UserService {
 
         await schema.validate({ username, email, password, confirmPassword });
 
+        if (/\s/g.test(username)) {
+            throw new Error("Nome de usuário não pode conter espaços");
+        }
+        
         const userExists = await prisma.user.findFirst({
             where: {OR: [{username}, {email}]}
         });
@@ -51,8 +55,10 @@ class UserService {
 
         const passwordHash = hashSync(password, 10);
 
+        const image_url = `https://source.boringavatars.com/beam/120/${username}?colors=472BC5,2E1A68,462B9B,5F32E8`;
+
         const user = await prisma.user.create({
-            data: { username, email, password: passwordHash }
+            data: { username, email, password: passwordHash, image_url }
         });
 
         return user;

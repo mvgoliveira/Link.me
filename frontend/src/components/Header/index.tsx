@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { api } from "../../services/api";
 import { Container } from "./styles"
 
 type propsType = {
@@ -5,8 +7,21 @@ type propsType = {
 }
 
 function Header({username}: propsType) {
+    const [imageUrl, setImageUrl] = useState<string>("");
+
+    useEffect(() => {
+        async function getUserImageUrl() {
+            const {data} = await api.get(`/user/${username}`);
+            setImageUrl(data.image_url);
+        }
+        
+        if (!imageUrl) {
+            getUserImageUrl();
+        }
+    }, []);
+    
     return (
-        <Container>
+        <Container imageUrl={imageUrl}>
             <img src="/logo.svg" alt="Link.me Logo" />
 
             <div className="profile">
@@ -15,9 +30,7 @@ function Header({username}: propsType) {
                     <button>editar o perfil</button>
                 </div>
 
-                <div className="profileImg">
-
-                </div>
+                <div className="profileImg"></div>
             </div>
         </Container>
     )

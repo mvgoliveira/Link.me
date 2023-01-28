@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+type ContainerPropsType = {
+    imageUrl: string;
+}
+
+export const Container = styled.div<ContainerPropsType>`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,13 +46,19 @@ export const Container = styled.div`
         }
 
         .profileImg {
+            cursor: pointer;
             width: 55px;
             height: 55px;
+            border: 1px solid var(--GREEN);
 
             margin-left: 12px;
             
-            background: #fff;
-            border-radius: 100%100%;
+            background: var(--BUTTON_BG);
+            border-radius: 100%;
+
+            background-image: ${props => props ? `url(${props.imageUrl})` : ""};
+            background-repeat: no-repeat;
+            background-size: contain;
         }
     }
 `;
