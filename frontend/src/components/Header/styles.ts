@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 type ContainerPropsType = {
-    imageUrl: string;
     isProfileMenuOpen: boolean;
 }
 
@@ -60,11 +59,11 @@ export const Container = styled.div<ContainerPropsType>`
             background: var(--BUTTON_BG);
             border-radius: 100%;
 
-            background-image: ${props => props ? `url(${props.imageUrl})` : ""};
-            background-repeat: no-repeat;
-            background-size: contain;
-
             border: ${props => props.isProfileMenuOpen ? "2px solid var(--GREEN)" : "2px solid transparent"};
+            
+            img {
+                border-radius: 100%;
+            }
         }
 
         .profileMenuContainer{
