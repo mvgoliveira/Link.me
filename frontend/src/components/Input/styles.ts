@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+type ContainerPropsType = {
+    hasLabel: boolean;
+}
+
+export const Container = styled.div<ContainerPropsType>`
     display: flex;
-    align-items: center;
-    background: var(--INPUT_BG);
-    border: 1.5px solid var(--INPUT_BORDER);
+    flex-direction: ${props => props.hasLabel ? "column" : "row"};
+    align-items:  ${props => props.hasLabel ? "flex-start" : "center"};
+    background: ${props => props.hasLabel ? "transparent" : "var(--INPUT_BG)"};
+    border: ${props => props.hasLabel ? "none" : "1.5px solid var(--INPUT_BORDER)"};
     border-radius: 4px;
     width: 100%;
     cursor: text;
@@ -16,23 +21,33 @@ export const Container = styled.div`
     }
 
     &:focus-within {
-        outline: 1px solid var(--BUTTON_BG);
+        outline: ${props => props.hasLabel ? "none" : "1px solid var(--BUTTON_BG)"};
+    }
+
+    label {
+        margin-bottom: 10px;
     }
     
     input {
         outline: none;
-        background: transparent;
-        border: none;
+        background: ${props => props.hasLabel ? "var(--INPUT_BG)" : "transparent"};
+        border: ${props => props.hasLabel ? "1.5px solid var(--INPUT_BORDER)" : "none"};
         color: var(--PRIMARY_FONT_COLOR);
-        width: 100%;
+        width: calc(100% - 18px);
         padding: 15px 0px;
         font-size: .8rem;
-        margin-left: 15px;
+        border-radius: 4px;
+
+        padding-left: 15px;
 
         &::placeholder {
             font-family: 'Inter', sans-serif;
             font-weight: 400;
             color: var(--INPUT_PLACEHOLDER_TXT)
+        }
+
+        &:focus {
+            outline: ${props => props.hasLabel ? "1px solid var(--BUTTON_BG)" : "none"};
         }
     }
 `; 

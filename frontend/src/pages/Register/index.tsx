@@ -58,4 +58,4 @@ function Register() {
 	)
 }
 
-export default Register
+export {Register}

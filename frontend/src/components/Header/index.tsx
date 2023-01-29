@@ -3,12 +3,15 @@ import { api } from "../../services/api";
 import { Container } from "./styles";
 import { MdLogout } from "react-icons/md";
 import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 type propsType = {
 	username: string | undefined;
 }
 
 function Header({username}: propsType) {
+    const navigate = useNavigate();
+    
     const { signOut } = useAuth();
 
     const [imageUrl, setImageUrl] = useState<string>("");
@@ -37,7 +40,7 @@ function Header({username}: propsType) {
             <div className="profile">
                 <div className="texts">
                     <p>@{username}</p>
-                    <button>editar o perfil</button>
+                    <button onClick={() => navigate('/admin/profile')}>editar o perfil</button>
                 </div>
 
                 <div
@@ -50,7 +53,7 @@ function Header({username}: propsType) {
                     <div className="profileMenu">
                         <div className="triangleContainer">
                             <svg  width="25" height="25" viewBox="-50 -50 300 300">
-                                <polygon className="triangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
+                                <polygon className="triangle" strokeLinejoin="round" points="100,0 0,200 200,200"/>
                             </svg>
                         </div>
                         

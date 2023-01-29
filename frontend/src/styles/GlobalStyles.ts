@@ -84,6 +84,8 @@ export const GlobalStyle = createGlobalStyle`
         --ICON_PURPLE_COLOR: #8157FF;
         --GREEN: #03DC69;
         --ERROR_INPUT_BORDER: #75161F;
+        --ERROR_BUTTON_PRIMARY: #96323B;
+        --ERROR_BUTTON_SECONDARY: #72262D;
         --ERROR_MESSAGE_BG: linear-gradient(268.25deg, #862C35 0.72%, #471724 33.5%, #501521 66.29%, #340D1D 99.07%);
         --PRIMARY_FONT_COLOR: #ffffff;
         --SECONDARY_FONT_COLOR: #E2E2E2;
