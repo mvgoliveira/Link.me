@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
 
@@ -9,16 +10,16 @@ import {Register} from './pages/Register';
 
 function CustomRoutes() {
     const {user} = useAuth();
-
+        
     return (
         <Routes>
-            <Route path="/" element={!user ? <Login/> : <Navigate replace to={`/admin`}/>}/>
-            <Route path="/login" element={!user ? <Login/> : <Navigate replace to={`/admin`}/>}/>
-            <Route path="/register" element={!user ? <Register/> : <Navigate replace to={`/admin`}/>}/>
-            <Route path='/:username' element={ <Home/> }/>
-            {user && (<>
-                <Route path='/admin' element={user.username ? <Admin/> : <Navigate replace to={`/login`}/>}/>
-                <Route path='/admin/profile' element={user.username ? <Profile/> : <Navigate replace to={`/login`}/>}/>
+            {user !== null && (<>
+                <Route path="/" element={user === "" ? <Login/> : <Navigate replace to={`/admin`}/>}/>
+                <Route path="/login" element={user === "" ? <Login/> : <Navigate replace to={`/admin`}/>}/>
+                <Route path="/register" element={user === "" ? <Register/> : <Navigate replace to={`/admin`}/>}/>
+                <Route path='/:username' element={ <Home/> }/>
+                <Route path='/admin' element={user !== "" ? <Admin/> : <Navigate replace to={`/login`}/>}/>
+                <Route path='/admin/profile' element={user !== "" ? <Profile/> : <Navigate replace to={`/login`}/>}/>
             </>)}
         </Routes>
     )

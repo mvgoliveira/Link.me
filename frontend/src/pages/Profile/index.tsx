@@ -71,6 +71,7 @@ function Profile() {
         } else {
             await api.delete(`/user/${user?.username}`);
             signOut();
+            navigate('/login');
         }
     }
 

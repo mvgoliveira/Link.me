@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { api } from "../../services/api";
 import { Container } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
@@ -29,6 +29,10 @@ function Register() {
             setError(error.response.data.message);
 		}
 	}
+
+	useEffect(() => {
+		setError("");
+	}, []);
 
 	return (
 		<Container>

@@ -18,7 +18,7 @@ type AuthContextProviderPropsType = {
 }
 
 type AuthContextType = {
-    user: UserType | null;
+    user: UserType | string | null;
     error: string | null;
     signIn: (email: string, password: string) => void;
     handleSetError: (message: string) => void;
@@ -28,7 +28,7 @@ type AuthContextType = {
 export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider(props: AuthContextProviderPropsType) {
-    const [user, setUser] = useState<UserType | null>(null);
+    const [user, setUser] = useState<UserType | null | string>(null);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -57,6 +57,8 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
 
         if (token) {
             getTokenInfos(token);
+        } else {
+            setUser("");
         }
     }, []);
 
@@ -97,7 +99,7 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
     async function signOut() {
         Cookies.remove('@link.me:token');
         api.defaults.headers.Authorization = null;
-        setUser(null);
+        setUser("");
     }
 
     return (

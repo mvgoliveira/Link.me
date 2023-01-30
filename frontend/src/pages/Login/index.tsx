@@ -29,6 +29,10 @@ function Login() {
 		}
 	}, [user]);
 
+	useEffect(() => {
+		handleSetError("");
+	}, []);
+
 	return (
 		<Container>
 			<section>
