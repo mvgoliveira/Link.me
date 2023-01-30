@@ -48,7 +48,13 @@ function Header({username}: propsType) {
                     tabIndex={1}
                     onBlur={() => setIsProfileMenuOpen(false)}
                 >
-                    <img src={imageUrl} alt="user avatar" onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}/>
+                    {imageUrl && (
+                        <img
+                            src={imageUrl}
+                            alt="user avatar"
+                            onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                        />
+                    )}
 
                     <div className="profileMenu">
                         <div className="triangleContainer">

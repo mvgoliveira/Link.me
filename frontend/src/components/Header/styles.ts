@@ -72,6 +72,7 @@ export const Container = styled.div<ContainerPropsType>`
         }
    
         .profileMenu {
+            cursor: default;
             display: ${props => props.isProfileMenuOpen ? "flex" : "none"};
 
             position: absolute;
