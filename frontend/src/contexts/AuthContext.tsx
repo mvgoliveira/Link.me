@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import Cookies from 'js-cookie';
 import { jwtVerify } from "jose";
+import Cookies from 'js-cookie';
 
 import { api } from '../services/api'
 
@@ -27,7 +27,7 @@ type AuthContextType = {
 export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider(props: AuthContextProviderPropsType) {
-    const [user, setUser] = useState<UserType | null >(null);
+    const [user, setUser] = useState<UserType | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {

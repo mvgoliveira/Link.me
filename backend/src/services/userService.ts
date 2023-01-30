@@ -94,12 +94,20 @@ class UserService {
             facebook_url
         });
         
-        const userExists = await prisma.user.findUnique({
-            where: {username: username}
+        let userExists = await prisma.user.findUnique({
+            where: { username }
         });
 
         if (!userExists) {
             throw new Error("Usuário não existe");
+        }
+
+        userExists = await prisma.user.findUnique({
+            where: { email }
+        })
+
+        if (userExists?.email === email) {
+            throw new Error("Email já cadastrado");
         }
 
         let newData = {};

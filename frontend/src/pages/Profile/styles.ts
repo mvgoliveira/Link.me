@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import bars from "../../assets/small_bars_illustration.svg";
+import black_bars from "../../assets/black_small_bars_illustration.svg";
 
 export const Container = styled.div`
     display: flex;
@@ -14,12 +15,24 @@ export const Container = styled.div`
     background-repeat: no-repeat;
     background-position: top left;
     background-size: 300px;
+
+    @media(max-width: 695px) {
+        background-image: url(${black_bars});
+    }
     
     section {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         width: 350px;
+
+        @media(max-width: 430px) {
+            width: 80%;
+        }
+
+        @media(max-width: 390px) {
+            width: 90%;
+        }
 
         margin-top: 100px;
 
@@ -48,7 +61,7 @@ export const Container = styled.div`
             margin-top: 50px;
             gap: 20px; 
 
-            .userImage {
+            .profileImg {
                 display: flex;
                 width: 130px;
                 height: 130px;

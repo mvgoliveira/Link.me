@@ -12,8 +12,33 @@ export const Container = styled.div<ContainerPropsType>`
     min-height: 150px;
     padding: 0 150px;
 
+    @media(max-width: 1335px) {
+        padding: 0 50px;
+    }
+
     img {
         width: 190px;
+    }
+
+    @media(max-width: 570px) {
+        padding: 30px 30px 0 30px;
+        min-height: 100px;
+
+        >img {
+            /* display: none; */
+        }
+    }
+
+    @media(max-width: 570px) {
+        padding: 30px 30px 0 30px;
+        min-height: 100px;
+    }
+
+    @media(max-width: 435px) {
+        
+        >img {
+            width: 120px;
+        }
     }
 
     .profile {

@@ -1,15 +1,17 @@
-import { Container, LinksContainer } from "./styles";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import { RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill } from "react-icons/ri";
 import { HiLink } from "react-icons/hi";
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
-import { useParams } from "react-router-dom";
+
 import { ErrorNotification } from "../../components/ErrorNotification";
+import { Container, LinksContainer } from "./styles";
+import { api } from "../../services/api";
 
 type UserType = {
     username: string;
     email: string;
-    image_url?: string | unknown;
+    image_url?: string | null;
     instagram_url?: string | unknown;
     facebook_url?: string | unknown;
     linkedin_url?: string | unknown;
@@ -50,8 +52,11 @@ function Home() {
                 <>
                     <section className="profile">
                         <div className="profileImg">
-
+                            {user.image_url && (
+                                <img src={user.image_url} alt="user image" />
+                            )}
                         </div>
+
                         <span>@mvgoliveira</span>
                     </section>
 

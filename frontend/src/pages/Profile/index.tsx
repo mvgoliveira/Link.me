@@ -1,14 +1,15 @@
-import { MdOutlineArrowBackIos } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-import { Input } from "../../components/Input";
-import { ErrorNotification } from "../../components/ErrorNotification";
+import { MdOutlineArrowBackIos } from "react-icons/md";
 
 import { useAuth } from "../../hooks/useAuth";
 import { api } from "../../services/api";
 import { Container } from "./styles";
-import { toast } from "react-toastify";
+
+import { ErrorNotification } from "../../components/ErrorNotification";
+import { Input } from "../../components/Input";
 
 function Profile() {
     const navigate = useNavigate();
@@ -52,9 +53,7 @@ function Profile() {
             if (!email && !password && !confirmPassword) {
                 setError("Nenhuma informação foi alterada");
             } else {
-                const {data} = await api.patch(`/user/${user?.username}`, senderData);
-                
-                console.log(data);
+                await api.patch(`/user/${user?.username}`, senderData);
                 
                 toast.success("Usuário alterado com sucesso");
                 setError("");
@@ -95,7 +94,7 @@ function Profile() {
                 <button onClick={() => navigate('/admin')}><MdOutlineArrowBackIos/> Voltar</button>
                 
                 <article className="userInfos">
-                    <div className="userImage">
+                    <div className="profileImg">
                         {imageUrl && (
                             <img src={imageUrl} alt="User avatar"/>
                         )}

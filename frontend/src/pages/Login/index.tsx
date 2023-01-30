@@ -1,7 +1,9 @@
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import { useAuth } from "../../hooks/useAuth";
 import { Container } from "./styles";
-import { Link, useNavigate } from "react-router-dom";
+
 import { ErrorNotification } from "../../components/ErrorNotification";
 
 function Login() {
