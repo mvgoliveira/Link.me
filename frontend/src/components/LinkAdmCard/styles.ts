@@ -18,6 +18,10 @@ export const Container = styled.div<ContainerPropsType>`
     max-height: ${props => props.isDeleted ? "0" : "none"};
     
     transition: margin 0.15s ease-out;
+
+    @media(max-width: 570px) {
+        min-width: 0;
+    }
     
     .texts {
         display: flex;
@@ -68,6 +72,8 @@ export const Container = styled.div<ContainerPropsType>`
                 color: var(--SECONDARY_FONT_COLOR);
                 width: 10px;
                 height: 10px;
+                min-width: 10px;
+                min-height: 10px;
             }
 
             .linkTitle {

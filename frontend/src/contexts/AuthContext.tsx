@@ -1,12 +1,11 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import Cookies from 'js-cookie';
 import { jwtVerify } from "jose";
+import Cookies from 'js-cookie';
 
 import { api } from '../services/api'
 
 type UserType = {
     username: string;
-    email: string;
     image_url?: string | unknown;
     instagram_url?: string | unknown;
     facebook_url?: string | unknown;
@@ -44,7 +43,6 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
             ) {
                 setUser({
                     username: verify.payload.username,
-                    email: verify.payload.email,
                     image_url: verify.payload.image_url,
                     instagram_url: verify.payload.instagram_url,
                     facebook_url: verify.payload.facebook_url,
@@ -54,9 +52,11 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
                 api.defaults.headers.Authorization = `Bearer ${token}`;
             }
         }
-
+        
         if (token) {
             getTokenInfos(token);
+        } else {
+            setUser({ username: "" });
         }
     }, []);
 
@@ -80,7 +80,6 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
             ) {
                 setUser({
                     username: verify.payload.username,
-                    email: verify.payload.email,
                     image_url: verify.payload.image_url,
                     instagram_url: verify.payload.instagram_url,
                     facebook_url: verify.payload.facebook_url,
@@ -97,7 +96,7 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
     async function signOut() {
         Cookies.remove('@link.me:token');
         api.defaults.headers.Authorization = null;
-        setUser(null);
+        setUser({ username: "" });
     }
 
     return (

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 import { api } from "../../services/api";
 import { Container } from "./styles";
-import { Link, useNavigate } from "react-router-dom";
+
 import { ErrorNotification } from "../../components/ErrorNotification";
 
 function Register() {
@@ -29,6 +31,10 @@ function Register() {
             setError(error.response.data.message);
 		}
 	}
+
+	useEffect(() => {
+		setError("");
+	}, []);
 
 	return (
 		<Container>
@@ -58,4 +64,4 @@ function Register() {
 	)
 }
 
-export default Register
+export {Register}

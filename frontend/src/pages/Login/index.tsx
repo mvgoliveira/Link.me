@@ -1,7 +1,9 @@
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import { useAuth } from "../../hooks/useAuth";
 import { Container } from "./styles";
-import { Link, useNavigate } from "react-router-dom";
+
 import { ErrorNotification } from "../../components/ErrorNotification";
 
 function Login() {
@@ -24,10 +26,14 @@ function Login() {
 	}
 
 	useEffect(() => {
-		if(user) {
+		if(user?.username) {
 			navigate(`/admin/${user.username}`);
 		}
 	}, [user]);
+
+	useEffect(() => {
+		handleSetError("");
+	}, []);
 
 	return (
 		<Container>
@@ -63,10 +69,9 @@ function Login() {
 
 					<small>ainda não possui uma conta? <Link to="/register">inscreva-se aqui</Link></small>
 				</article>
-
 			</section>
 		</Container>
 	)
 }
 
-export default Login
+export {Login}

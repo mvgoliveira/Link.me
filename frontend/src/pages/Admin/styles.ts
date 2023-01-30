@@ -7,13 +7,32 @@ export const Container = styled.div`
     width: 100vw;
     max-width: 1560px;
     color: var(--PRIMARY_FONT_COLOR);
-
+    
     .content {
         display: flex;
         flex: 1;
-        margin: 0 150px;
         gap: 85px;
         margin-top: 50px;
+        padding: 0 150px;
+        
+        @media(max-width: 1335px) {
+            padding: 0 50px;
+        }
+        
+        @media(max-width: 1145px) {
+            padding: 0 30px;
+            gap: 30px;
+        }
+
+        @media(max-width: 1040px) {
+            align-items: center;
+            flex-direction: column; 
+            padding: 0 50px;
+        }
+        
+        @media(max-width: 570px) {
+            padding: 0 20px;
+        }
 
         article {
             flex: 1;
@@ -21,9 +40,14 @@ export const Container = styled.div`
 
         .linkContainer {
             display: flex;
+            flex: 1;
             flex-direction: column;
             gap: 20px;
             margin-bottom: 50px;
+
+            @media(max-width: 1040px) {
+                width: 100%;
+            }
         }
     }
 `
@@ -41,9 +65,14 @@ export const Menu = styled.article<MenuPropsType>`
     background: var(--HOME_GLASS_BG);
     margin-bottom: 50px;
     padding: 50px 0;
+    width: 100%;
     min-width: 465px;
     height: 100%;
     min-height: 521px;
+
+    @media(max-width: 570px) {
+        min-width: 0;
+    }
 
     .upper {
         display: flex;
@@ -133,6 +162,9 @@ export const Menu = styled.article<MenuPropsType>`
         padding-top: 65px;
         gap: 15px;
 
+        @media(max-width: 570px) {
+            flex-direction: column;
+        }
         
         button {
             display: flex;

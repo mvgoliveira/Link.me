@@ -42,6 +42,7 @@ class UserController {
             username: newUsername,
             email,
             password,
+            confirmPassword,
             image_url,
             instagram_url,
             linkedin_url,
@@ -53,9 +54,9 @@ class UserController {
         try {
             const user = await userService.update(
                 username,
-                newUsername,
                 email,
                 password,
+                confirmPassword,
                 image_url,
                 instagram_url,
                 linkedin_url,

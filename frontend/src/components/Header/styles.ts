@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 type ContainerPropsType = {
-    imageUrl: string;
     isProfileMenuOpen: boolean;
 }
 
@@ -13,8 +12,33 @@ export const Container = styled.div<ContainerPropsType>`
     min-height: 150px;
     padding: 0 150px;
 
+    @media(max-width: 1335px) {
+        padding: 0 50px;
+    }
+
     img {
         width: 190px;
+    }
+
+    @media(max-width: 570px) {
+        padding: 30px 30px 0 30px;
+        min-height: 100px;
+
+        >img {
+            /* display: none; */
+        }
+    }
+
+    @media(max-width: 570px) {
+        padding: 30px 30px 0 30px;
+        min-height: 100px;
+    }
+
+    @media(max-width: 435px) {
+        
+        >img {
+            width: 120px;
+        }
     }
 
     .profile {
@@ -60,11 +84,11 @@ export const Container = styled.div<ContainerPropsType>`
             background: var(--BUTTON_BG);
             border-radius: 100%;
 
-            background-image: ${props => props ? `url(${props.imageUrl})` : ""};
-            background-repeat: no-repeat;
-            background-size: contain;
-
             border: ${props => props.isProfileMenuOpen ? "2px solid var(--GREEN)" : "2px solid transparent"};
+            
+            img {
+                border-radius: 100%;
+            }
         }
 
         .profileMenuContainer{
@@ -73,6 +97,7 @@ export const Container = styled.div<ContainerPropsType>`
         }
    
         .profileMenu {
+            cursor: default;
             display: ${props => props.isProfileMenuOpen ? "flex" : "none"};
 
             position: absolute;

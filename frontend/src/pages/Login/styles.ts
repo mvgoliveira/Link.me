@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import bars from "../../assets/bars_illustration.svg";
+import black_bars from "../../assets/black_bars_illustration.svg";
 
 export const Container = styled.div`
     display: flex;
@@ -12,7 +13,16 @@ export const Container = styled.div`
     background-image: url(${bars});
     background-repeat: no-repeat;
     background-position: top left;
-    background-size: 60vh;
+    background-size: 500px;
+
+    @media(max-width: 840px) {
+        justify-content: center;
+
+        background-image: url(${black_bars});
+        background-repeat: no-repeat;
+        background-position: top left;
+        background-size: 500px;
+    }
 
     section {
         display: flex;
@@ -21,6 +31,10 @@ export const Container = styled.div`
         justify-content: center;
         padding: 50px 50px 50px 0;
         align-items: center;
+
+        @media(max-width: 840px) {
+            padding: 0px;
+        }
         
         article {
             display: flex;

@@ -1,16 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
 import {RiShareFill, RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill} from "react-icons/ri";
 import {AiFillEye} from "react-icons/ai";
 import {HiPlusSm} from "react-icons/hi";
-import { Container, Menu } from "./styles";
+
 import { api } from "../../services/api";
 import { useAuth } from "../../hooks/useAuth";
+import { Container, Menu } from "./styles";
+
 import { ErrorNotification } from "../../components/ErrorNotification";
 import { LinkAdmCard } from "../../components/LinkAdmCard";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 type LinkType = {
     id: string;
@@ -21,7 +24,7 @@ type LinkType = {
 function Admin() {
     const navigate = useNavigate();
     const {user} = useAuth();
-
+    
     const [instagram, setInstagram] = useState<string>("");
     const [linkedin, setLinkedin] = useState<string>("");
     const [facebook, setFacebook] = useState<string>("");
@@ -87,6 +90,8 @@ function Admin() {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+
         if (user) {
             async function getUserInfos() {
                 const {data: userData} = await api.get(`/user/${user?.username}`);

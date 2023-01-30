@@ -66,56 +66,60 @@ class UserService {
 
     async update(
         username: string,
-        newUsername?: string,
         email?: string,
         password?: string,
+        confirmPassword?: string,
         image_url?: string,
         instagram_url?: string,
         linkedin_url?: string,
         facebook_url?: string
     ) {
         const schema = yup.object().shape({
-            newUsername: yup.string(),
             email: yup.string().email("Email is not valid"),
             password: yup.string().min(8, "A senha deve ter mais de 8 caracteres"),
+            confirmPassword: yup.string().min(8, "a senha deve ter mais de 8 caracteres"),
             image_url: yup.string().url("A url da imagem de perfil não é valida"),
             instagram_url: yup.string().url("A url do Instagram não é valida"),
             linkedin_url: yup.string().url("A url do LinkedIn não é valida"),
             facebook_url: yup.string().url("A url do Facebook não é valida")
         });
 
-        await schema.validate({ newUsername, email, password, image_url, instagram_url, linkedin_url, facebook_url });
+        await schema.validate({
+            email,
+            password,
+            confirmPassword,
+            image_url,
+            instagram_url,
+            linkedin_url,
+            facebook_url
+        });
         
-        const userExists = await prisma.user.findUnique({
-            where: {username: username}
+        let userExists = await prisma.user.findUnique({
+            where: { username }
         });
 
         if (!userExists) {
             throw new Error("Usuário não existe");
         }
 
-        if (newUsername && newUsername !== username) {
-            const userExists = await prisma.user.findFirst({
-                where: {OR: [{username}, {email}]}
-            });
-    
-            if (userExists && userExists.username === newUsername) {
-                throw new Error("Nome de usuário já está em uso");
-            }
-            
-            if (userExists && userExists.email === email) {
-                throw new Error("Email já está em uso");
-            }
+        userExists = await prisma.user.findUnique({
+            where: { email }
+        })
+
+        if (userExists?.email === email) {
+            throw new Error("Email já cadastrado");
         }
 
         let newData = {};
-
         
         if (password) {
+            if (password !== confirmPassword) {
+                throw new Error("Senha e confirmação de senha não conferem");
+            }
+
             const passwordHash = hashSync(password, 10);
             
             newData = { 
-                username: newUsername,
                 email,
                 password: passwordHash,
                 image_url,
@@ -125,7 +129,6 @@ class UserService {
             };
         } else {
             newData = { 
-                username: newUsername,
                 email,
                 image_url,
                 instagram_url,

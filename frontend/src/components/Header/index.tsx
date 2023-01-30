@@ -10,8 +10,9 @@ type propsType = {
 }
 
 function Header({username}: propsType) {
-    const { signOut } = useAuth();
     const navigate = useNavigate();
+    
+    const { signOut } = useAuth();
 
     const [imageUrl, setImageUrl] = useState<string>("");
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState<boolean>(false);
@@ -33,25 +34,32 @@ function Header({username}: propsType) {
     }, []);
     
     return (
-        <Container imageUrl={imageUrl} isProfileMenuOpen={isProfileMenuOpen}>
+        <Container isProfileMenuOpen={isProfileMenuOpen}>
             <img src="/logo.svg" alt="Link.me Logo" />
 
             <div className="profile">
                 <div className="texts">
                     <p>@{username}</p>
-                    <button>editar o perfil</button>
+                    <button onClick={() => navigate('/admin/profile')}>editar o perfil</button>
                 </div>
 
                 <div
                     id="profileImg"
                     tabIndex={1}
-                    onFocus={() => setIsProfileMenuOpen(true)}
                     onBlur={() => setIsProfileMenuOpen(false)}
                 >
+                    {imageUrl && (
+                        <img
+                            src={imageUrl}
+                            alt="user avatar"
+                            onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                        />
+                    )}
+
                     <div className="profileMenu">
                         <div className="triangleContainer">
                             <svg  width="25" height="25" viewBox="-50 -50 300 300">
-                                <polygon className="triangle" stroke-linejoin="round" points="100,0 0,200 200,200"/>
+                                <polygon className="triangle" strokeLinejoin="round" points="100,0 0,200 200,200"/>
                             </svg>
                         </div>
                         
