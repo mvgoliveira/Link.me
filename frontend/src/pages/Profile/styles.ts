@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import bars from "../../assets/bars_illustration.svg";
+import bars from "../../assets/small_bars_illustration.svg";
 
 export const Container = styled.div`
     display: flex;
@@ -12,9 +12,8 @@ export const Container = styled.div`
 
     background-image: url(${bars});
     background-repeat: no-repeat;
-    background-position-x: -10%;
-    background-position-y: -50%;
-    background-size: 60vh;
+    background-position: top left;
+    background-size: 300px;
     
     section {
         display: flex;
@@ -25,12 +24,20 @@ export const Container = styled.div`
         margin-top: 100px;
 
         > button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
             cursor: pointer;
             border: none;
             color: var(--PRIMARY_COLOR);
             font-weight: 500;
             font-size: .9rem;
             background: transparent;
+
+            svg {
+                margin-left: -9px;
+            }
         }
 
         .userInfos {
@@ -57,7 +64,7 @@ export const Container = styled.div`
 
             span {
                 font-size: 1rem;
-                font-weight: 500;
+                font-weight: 600;
             }
         }
 
@@ -82,7 +89,7 @@ export const Container = styled.div`
                     border: none;
                     color: var(--PRIMARY_COLOR);
                     font-weight: 500;
-                    font-size: 1rem;
+                    font-size: .9rem;
                     background: transparent;
                     padding: 15px 0;
                     margin-top: 45px;
@@ -114,7 +121,7 @@ export const Container = styled.div`
             background: var(--ERROR_MESSAGE_BG);
             
             margin-top: 50px;
-            margin-bottom: 100px;
+            margin-bottom: 80px;
 
             .deleteAccountTexts {
                 display: flex;
@@ -147,7 +154,15 @@ export const Container = styled.div`
                     color: var(--PRIMARY_FONT);
                     padding: 12px 15px;
                     border-radius: 6px;
-                    background: var(--ERROR_BUTTON_PRIMARY);
+                    background: var(--ERROR_BUTTON_SECONDARY);
+
+                    :last-child {
+                        background: var(--ERROR_BUTTON_PRIMARY);
+                    }
+                    
+                    :nth-child(2) {
+                        background: var(--ERROR_BUTTON_PRIMARY);
+                    }
     
                     &:hover {
                         filter: brightness(0.9)

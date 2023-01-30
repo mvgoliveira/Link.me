@@ -25,6 +25,7 @@ export const Container = styled.div<ContainerPropsType>`
     }
 
     label {
+        font-size: .95rem;
         margin-bottom: 10px;
     }
     

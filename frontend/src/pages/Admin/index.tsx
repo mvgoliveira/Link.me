@@ -87,6 +87,8 @@ function Admin() {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+
         if (user) {
             async function getUserInfos() {
                 const {data: userData} = await api.get(`/user/${user?.username}`);

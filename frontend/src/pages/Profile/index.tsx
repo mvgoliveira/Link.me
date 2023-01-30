@@ -1,19 +1,86 @@
-import { Input } from "../../components/Input";
-import { useAuth } from "../../hooks/useAuth";
-import { Container } from "./styles";
 import { MdOutlineArrowBackIos } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import { Input } from "../../components/Input";
+import { ErrorNotification } from "../../components/ErrorNotification";
+
+import { useAuth } from "../../hooks/useAuth";
 import { api } from "../../services/api";
+import { Container } from "./styles";
+import { toast } from "react-toastify";
 
 function Profile() {
-    const { user } = useAuth();
+    const navigate = useNavigate();
+    const { user, signOut } = useAuth();
+
+    const [error, setError] = useState("");
     
     const [imageUrl, setImageUrl] = useState<string>("");
+    const [oldEmail, setOldEmail] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    type senderDataType = {
+        email?: string;
+        password?: string;
+        confirmPassword?: string;
+    }
+
+    async function handleUpdateAccount(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        try {
+            const senderData = {} as senderDataType;
+            
+            if (email) {
+                senderData.email = email;
+            }
+
+            if (password && confirmPassword) {
+                senderData.password = password;
+                senderData.confirmPassword = confirmPassword;
+            } else if (password && !confirmPassword) {
+                return setError("Campo de confirmação de senha obrigatório");
+            } else if (!password && confirmPassword) {
+                return setError("Campo de senha obrigatório");
+            }
+
+            if (!email && !password && !confirmPassword) {
+                setError("Nenhuma informação foi alterada");
+            } else {
+                const {data} = await api.patch(`/user/${user?.username}`, senderData);
+                
+                console.log(data);
+                
+                toast.success("Usuário alterado com sucesso");
+                setError("");
+            }
+            
+        } catch (error: any) {
+            setError(error.response.data.message);
+        }
+    }
+
+    async function handleDeleteAccount() {
+        if (isDeleting === false) {
+            setIsDeleting(true);
+        } else {
+            await api.delete(`/user/${user?.username}`);
+            signOut();
+        }
+    }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+
         async function getUserImageUrl() {
             const {data} = await api.get(`/user/${user?.username}`);
             setImageUrl(data.image_url);
+            setOldEmail(data.email);
         }
         
         if (!imageUrl) {
@@ -24,40 +91,77 @@ function Profile() {
     return (
         <Container>
             <section>
-                <button><MdOutlineArrowBackIos/> Voltar</button>
+                <button onClick={() => navigate('/admin')}><MdOutlineArrowBackIos/> Voltar</button>
                 
                 <article className="userInfos">
                     <div className="userImage">
-                        <img src={imageUrl} alt="User avatar" />
+                        {imageUrl && (
+                            <img src={imageUrl} alt="User avatar"/>
+                        )}
                     </div>
-
-                    <span>@{user?.username}</span>
+                    
+                    {user && (
+                        <span>@{user?.username}</span>
+                    )}
                 </article>
 
-                <form action="">
+                <form onSubmit={(e) => handleUpdateAccount(e)}>
+                    
                     <article className="inputsContainer">
-                        <Input placeholder="Digite o novo email" type="text" value={user?.email} label="Email"/>
+                        {error && (
+                            <ErrorNotification error={error}/>
+                        )}
                         
-                        <Input placeholder="Digite a nova senha" type="password" value="******************" label="Senha"/>
+                        <Input
+                            placeholder="Digite o novo email"
+                            type="text"
+                            label="Email"
+                            value={email ? email : oldEmail}
+                            onChange={(e) => setEmail(e.target.value)}
+                            />
+                        
+                        <Input
+                            placeholder="Digite a nova senha"
+                            type="password"
+                            label="Nova senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            />
+                        
+                        <Input
+                            placeholder="Confirme a nova senha"
+                            type="password"
+                            label="Confirmar nova senha"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
                     </article>
 
                     <article className="buttonsContainer">
-                        <button>Cancelar</button>
-                        <button>Salvar</button>
+                        <button type="button" onClick={() => navigate("/admin")}>Cancelar</button>
+                        <button type="submit">Salvar</button>
                     </article>
                 </form>
 
                 <article className="deleteAccountContainer">
                     <div className="deleteAccountTexts">
-                        <span>Deletar Conta</span>
+                        {isDeleting ? (
+                            <span>Tem certeza?</span>
+                        ) : (
+                            <span>Deletar Conta</span>
+                        )}
                         <p>Essa ação é irreversível</p>
                     </div>
                     
                     <div className="deleteAccountButtons">
-                        {/* <button>Não</button>
-                        <button>Sim</button> */}
-
-                        <button>Delete sua conta</button>
+                        {isDeleting ? (
+                            <>
+                                <button onClick={() => setIsDeleting(false)}>Não</button>
+                                <button onClick={handleDeleteAccount}>Sim</button>
+                            </>
+                        ) : (
+                            <button className="deleteButton" onClick={handleDeleteAccount}>Delete sua conta</button>
+                        )}
                     </div>
                 </article>
             </section>

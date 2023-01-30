@@ -63,7 +63,6 @@ function Login() {
 
 					<small>ainda não possui uma conta? <Link to="/register">inscreva-se aqui</Link></small>
 				</article>
-
 			</section>
 		</Container>
 	)
