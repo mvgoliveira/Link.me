@@ -24,7 +24,7 @@ function Login() {
 	}
 
 	useEffect(() => {
-		if(user) {
+		if(user?.username) {
 			navigate(`/admin/${user.username}`);
 		}
 	}, [user]);

@@ -3,8 +3,7 @@ import { RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill } from "react-ico
 import { HiLink } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
-import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 import { ErrorNotification } from "../../components/ErrorNotification";
 
 type UserType = {
@@ -25,7 +24,7 @@ type LinkType = {
 function Home() {
     const { username } = useParams();
 
-    const [user, setUser] = useState<UserType| null>(null);
+    const [user, setUser] = useState<UserType | null>(null);
     const [links, setLinks] = useState<[LinkType] | null>(null);
     const [error, setError] = useState<string | null>(null);
 
@@ -50,7 +49,9 @@ function Home() {
             {user && (
                 <>
                     <section className="profile">
-                        <div className="profileImg"></div>
+                        <div className="profileImg">
+
+                        </div>
                         <span>@mvgoliveira</span>
                     </section>
 

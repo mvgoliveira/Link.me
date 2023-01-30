@@ -6,7 +6,6 @@ import { api } from '../services/api'
 
 type UserType = {
     username: string;
-    email: string;
     image_url?: string | unknown;
     instagram_url?: string | unknown;
     facebook_url?: string | unknown;
@@ -18,7 +17,7 @@ type AuthContextProviderPropsType = {
 }
 
 type AuthContextType = {
-    user: UserType | string | null;
+    user: UserType | null;
     error: string | null;
     signIn: (email: string, password: string) => void;
     handleSetError: (message: string) => void;
@@ -28,7 +27,7 @@ type AuthContextType = {
 export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider(props: AuthContextProviderPropsType) {
-    const [user, setUser] = useState<UserType | null | string>(null);
+    const [user, setUser] = useState<UserType | null >(null);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -44,7 +43,6 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
             ) {
                 setUser({
                     username: verify.payload.username,
-                    email: verify.payload.email,
                     image_url: verify.payload.image_url,
                     instagram_url: verify.payload.instagram_url,
                     facebook_url: verify.payload.facebook_url,
@@ -54,11 +52,11 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
                 api.defaults.headers.Authorization = `Bearer ${token}`;
             }
         }
-
+        
         if (token) {
             getTokenInfos(token);
         } else {
-            setUser("");
+            setUser({ username: "" });
         }
     }, []);
 
@@ -82,7 +80,6 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
             ) {
                 setUser({
                     username: verify.payload.username,
-                    email: verify.payload.email,
                     image_url: verify.payload.image_url,
                     instagram_url: verify.payload.instagram_url,
                     facebook_url: verify.payload.facebook_url,
@@ -99,7 +96,7 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
     async function signOut() {
         Cookies.remove('@link.me:token');
         api.defaults.headers.Authorization = null;
-        setUser("");
+        setUser({ username: "" });
     }
 
     return (

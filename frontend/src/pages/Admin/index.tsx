@@ -21,7 +21,7 @@ type LinkType = {
 function Admin() {
     const navigate = useNavigate();
     const {user} = useAuth();
-
+    
     const [instagram, setInstagram] = useState<string>("");
     const [linkedin, setLinkedin] = useState<string>("");
     const [facebook, setFacebook] = useState<string>("");
