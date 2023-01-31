@@ -36,6 +36,9 @@ Este projeto usa as seguintes tecnologias:
 
   #  baixe as dependências
   yarn [dentro de cada página específica]
+
+  # configure o banco de dados
+  yarn prisma migrate dev --name init
  
   #  divirta-se!
   yarn dev [no frontend]
