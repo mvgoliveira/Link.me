@@ -15,7 +15,7 @@
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "yarn && prisma migrate deploy && tsc",
+		"build": "yarn && tsc",
 		"dev": "ts-node-dev src/server.ts",
 		"start": "node ./dist/app.js"
 	},
