@@ -158,12 +158,20 @@ export const Container = styled.div`
             align-items: center;
     
             p {
+                display: flex;
+                gap: 5px;
+                align-items: center;
                 color: var(--INPUT_PLACEHOLDER_TXT);
                 font-size: 0.8rem;
                 margin-top: 20px;
 
                 @media(max-width: 530px) {
                     font-size: 0.7rem;
+                }
+
+                svg {
+                    height: 13px;
+                    width: fit-content;
                 }
             }
     
