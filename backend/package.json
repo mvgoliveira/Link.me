@@ -12,9 +12,9 @@
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "npm install && tsc",
+		"build": "tsc",
 		"dev": "ts-node-dev src/server.ts",
-		"start": "node ./dist/application.js"
+		"start": "node ./dist/app.js"
 	},
 	"keywords": [],
 	"author": "",
