@@ -36,6 +36,8 @@ class UserService {
         if (/\s/g.test(username)) {
             throw new Error("Nome de usuário não pode conter espaços");
         }
+
+        email = email.toLowerCase();
         
         const userExists = await prisma.user.findFirst({
             where: {OR: [{username}, {email}]}
@@ -101,6 +103,8 @@ class UserService {
         if (!userExists) {
             throw new Error("Usuário não existe");
         }
+
+        email = email?.toLowerCase();
 
         if (email) {
             userExists = await prisma.user.findUnique({
