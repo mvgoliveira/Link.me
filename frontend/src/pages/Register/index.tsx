@@ -1,14 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+import { FaSpinner } from "react-icons/fa";
+
 import { api } from "../../services/api";
 import { Container } from "./styles";
 
 import { ErrorNotification } from "../../components/ErrorNotification";
+import { useAuth } from "../../hooks/useAuth";
 
 function Register() {
 	document.title = 'Cadastro - Link.me';
 	const navigate = useNavigate();
+
+	const {isLoading, setIsLoading} = useAuth();
 
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
@@ -17,8 +22,9 @@ function Register() {
 	const [error, setError] = useState<string | null>(null);
 
 	async function handleRegister(e: React.FormEvent) {
+		setIsLoading(true);
 		e.preventDefault();
-
+		
 		try {
 			if (username && email && password && confirmPassword) {
 				await api.post('/user', {username, email, password, confirmPassword});
@@ -28,8 +34,9 @@ function Register() {
 				setError("Preencha todos os campos");
 			}
 		} catch (error: any) {
-            setError(error.response.data.message);
+			setError(error.response.data.message);
 		}
+		setIsLoading(false);
 	}
 
 	useEffect(() => {
@@ -53,7 +60,11 @@ function Register() {
 						<input type="text" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
 						<input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
 						<input type="password" placeholder="Confirmar senha" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-						<button type="submit">Fazer cadastro</button>
+						<button type="submit">{isLoading ? (
+							<FaSpinner />
+						) : (
+							"Fazer cadastro"
+						)}</button>
 					</form>
 
 					<small>Já possui uma conta? <Link to="/login">Faça o login aqui</Link></small>

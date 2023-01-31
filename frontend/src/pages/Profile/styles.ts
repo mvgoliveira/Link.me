@@ -120,6 +120,12 @@ export const Container = styled.div`
                     &:nth-child(2) {
                         flex: 7;
                         background: var(--BUTTON_BG);
+
+                        svg {
+                            animation: rotation 1.5s infinite linear;
+                            width: 13px;
+                            height: 13px;
+                        }
                     }
                 }
             }
@@ -182,7 +188,15 @@ export const Container = styled.div`
                     }
                 }
             }
+        }
+    }
 
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
         }
     }
 `

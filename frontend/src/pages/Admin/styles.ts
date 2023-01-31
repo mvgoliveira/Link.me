@@ -106,7 +106,7 @@ export const Menu = styled.article<MenuPropsType>`
                     background: var(--BUTTON_BG);
                     color: var(--PRIMARY_FONT_COLOR);
                     font-weight: 600;
-                    font-size: .9rem;
+                    font-size: .85rem;
                     width: 100%;
                     padding: 18px;
                     border-radius: 8px;
@@ -123,8 +123,23 @@ export const Menu = styled.article<MenuPropsType>`
 
                     &:nth-child(2) {
                         flex: 2;
+
+                        svg {
+                            animation: rotation 1.5s infinite linear;
+                            width: 13px;
+                            height: 13px;
+                        }
                     }
                 }
+            }
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
             }
         }
 

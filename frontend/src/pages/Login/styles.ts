@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import bars from "../../assets/bars_illustration.svg";
 import black_bars from "../../assets/black_bars_illustration.svg";
@@ -85,6 +85,9 @@ export const Container = styled.div`
                 }
 
                 button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     border-radius: 4px;
                     cursor: pointer;
                     font-weight: 300;
@@ -102,6 +105,12 @@ export const Container = styled.div`
                         opacity: 0.7;
                         cursor: not-allowed;
                     }
+
+                    svg {
+                        animation: rotation 1.5s infinite linear;
+                        width: 16px;
+                        height: 16px;
+                    }
                 }
             }
 
@@ -113,6 +122,15 @@ export const Container = styled.div`
                     color: var(--GREEN)
                 }
             }
+        }
+    }
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
         }
     }
 `

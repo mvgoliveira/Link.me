@@ -10,11 +10,12 @@ import { Container } from "./styles";
 
 import { ErrorNotification } from "../../components/ErrorNotification";
 import { Input } from "../../components/Input";
+import { FaSpinner } from "react-icons/fa";
 
 function Profile() {
 	document.title = 'Perfil - Link.me';
     const navigate = useNavigate();
-    const { user, signOut } = useAuth();
+    const { user, signOut, isLoading, setIsLoading } = useAuth();
 
     const [error, setError] = useState("");
     
@@ -33,6 +34,8 @@ function Profile() {
     }
 
     async function handleUpdateAccount(e: React.FormEvent<HTMLFormElement>) {
+        setIsLoading(true);
+
         e.preventDefault();
 
         try {
@@ -63,6 +66,8 @@ function Profile() {
         } catch (error: any) {
             setError(error.response.data.message);
         }
+
+        setIsLoading(false);
     }
 
     async function handleDeleteAccount() {
@@ -140,7 +145,13 @@ function Profile() {
 
                     <article className="buttonsContainer">
                         <button type="button" onClick={() => navigate("/admin")}>Cancelar</button>
-                        <button type="submit">Salvar</button>
+                        <button type="submit">
+                            {isLoading ? (
+                                <FaSpinner />
+                            ) : (
+                                "Salvar"
+                            )}
+                        </button>
                     </article>
                 </form>
 

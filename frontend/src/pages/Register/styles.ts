@@ -115,6 +115,12 @@ export const Container = styled.div`
                     &:hover {
                         filter: brightness(0.9)
                     }
+
+                    svg {
+                        animation: rotation 1.5s infinite linear;
+                        width: 13px;
+                        height: 13px;
+                    }
                 }
             }
 
@@ -126,6 +132,15 @@ export const Container = styled.div`
                     color: var(--GREEN)
                 }
             }
+        }
+    }
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
         }
     }
 `

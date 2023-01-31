@@ -19,9 +19,11 @@ type AuthContextProviderPropsType = {
 type AuthContextType = {
     user: UserType | null;
     error: string | null;
+    isLoading: boolean;
     signIn: (email: string, password: string) => void;
     handleSetError: (message: string) => void;
     signOut: () => void;
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -29,6 +31,7 @@ export const AuthContext = createContext({} as AuthContextType)
 export function AuthContextProvider(props: AuthContextProviderPropsType) {
     const [user, setUser] = useState<UserType | null>(null);
     const [error, setError] = useState<string | null>(null);
+	const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const token = Cookies.get('@link.me:token');
@@ -66,6 +69,7 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
 
     async function signIn(email: string, password: string) {
         try {
+    		setIsLoading(true);
             const { data: token } = await api.post('/login', {email, password});
 
             const secret = new TextEncoder().encode(import.meta.env.VITE_TOKEN_SECRET);
@@ -91,6 +95,8 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
         } catch (error: any) {
             setError(error.response.data.message);
         }
+        
+        setIsLoading(false);
     }
 
     async function signOut() {
@@ -100,7 +106,7 @@ export function AuthContextProvider(props: AuthContextProviderPropsType) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, signIn, error, handleSetError, signOut }}>
+        <AuthContext.Provider value={{ user, signIn, error, handleSetError, signOut, isLoading, setIsLoading }}>
             { props.children }
         </AuthContext.Provider>
     )

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import {RiShareFill, RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill} from "react-icons/ri";
+import { FaSpinner } from "react-icons/fa";
 import {AiFillEye} from "react-icons/ai";
 import {HiPlusSm} from "react-icons/hi";
 
@@ -25,7 +26,7 @@ function Admin() {
     document.title = 'Dashboard - Link.me';
 
     const navigate = useNavigate();
-    const {user} = useAuth();
+    const { user, isLoading, setIsLoading } = useAuth();
     
     const [instagram, setInstagram] = useState<string>("");
     const [linkedin, setLinkedin] = useState<string>("");
@@ -42,6 +43,8 @@ function Admin() {
     const [error, setError] = useState<string | null>(null);
 
     async function handleCreateLink(e: React.FormEvent<HTMLFormElement>) {
+        setIsLoading(true);
+
         e.preventDefault();
 
         try {
@@ -57,6 +60,8 @@ function Admin() {
         } catch (error: any) {
             setError(error.response.data.message)
         }
+
+        setIsLoading(false);
     }
 
     async function handleUpdateInstagram() {
@@ -160,13 +165,19 @@ function Admin() {
 
                                         <article className="addNewLinkButtonsContainer">
                                             <button type="button" onClick={() => setIsAddNewLinkActive(false)}> Cancelar </button>
-                                            <button type="submit"> Adicionar </button>
+                                            <button type="submit">{isLoading ? (
+                                                <FaSpinner />
+                                            ) : (
+                                                "Adicionar"
+                                            )}</button>
                                         </article>
                                     </form>
                                 </section>
 
 
-                                <button onClick={() => setIsAddNewLinkActive(true)}><HiPlusSm /> Adicionar link</button>
+                                <button onClick={() => setIsAddNewLinkActive(true)}>
+                                    <HiPlusSm /> Adicionar link
+                                </button>
                                 
                                 <Input
                                     Icon={RiInstagramFill}
