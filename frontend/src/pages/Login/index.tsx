@@ -7,6 +7,7 @@ import { Container } from "./styles";
 import { FaSpinner } from "react-icons/fa";
 
 import { ErrorNotification } from "../../components/ErrorNotification";
+import { Input } from "../../components/Input";
 
 function Login() {
 	document.title = 'Login - Link.me';
@@ -50,15 +51,15 @@ function Login() {
 					)}
 
 					<form onSubmit={handleSignIn}>
-						<input 
+						<Input 
 							type="text"
 							name="email"
 							placeholder="Email"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 						/>
-						
-						<input
+
+						<Input
 							type="password"
 							name="password"
 							placeholder="Senha"

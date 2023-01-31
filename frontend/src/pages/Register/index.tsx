@@ -8,6 +8,7 @@ import { Container } from "./styles";
 
 import { ErrorNotification } from "../../components/ErrorNotification";
 import { useAuth } from "../../hooks/useAuth";
+import { Input } from "../../components/Input";
 
 function Register() {
 	document.title = 'Cadastro - Link.me';
@@ -56,10 +57,10 @@ function Register() {
 					)}
 
 					<form onSubmit={handleRegister}>
-						<input type="text" name="username" placeholder="Nome de usuário" value={username} onChange={(e) => setUsername(e.target.value)}/>
-						<input type="text" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-						<input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
-						<input type="password" placeholder="Confirmar senha" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+						<Input type="text" name="username" placeholder="Nome de usuário" value={username} onChange={(e) => setUsername(e.target.value)}/>
+						<Input type="text" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+						<Input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
+						<Input type="password" placeholder="Confirmar senha" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
 						<button type="submit">{isLoading ? (
 							<FaSpinner />
 						) : (

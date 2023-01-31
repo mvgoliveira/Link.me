@@ -12,9 +12,10 @@ type InputPropsType = {
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 	onBlur?: React.FocusEventHandler<HTMLInputElement>;
 	onFocus?: React.FocusEventHandler<HTMLInputElement>;
+	name?: string;
 }
 
-function Input({Icon, placeholder, id, onCLick, type, value, onChange, onBlur, onFocus, label}: InputPropsType) {
+function Input({Icon, placeholder, id, onCLick, type, value, onChange, onBlur, onFocus, label, name}: InputPropsType) {
 	return (
 		<Container onClick={onCLick} hasLabel={label ? true : false}>
 			{Icon && <Icon />}
@@ -26,6 +27,7 @@ function Input({Icon, placeholder, id, onCLick, type, value, onChange, onBlur, o
 			<input
 				type={type}
 				id={id}
+				name={name}
 				placeholder={placeholder}
 				value={value ? value : ""}
 				onChange={onChange}

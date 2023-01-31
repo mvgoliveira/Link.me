@@ -70,37 +70,6 @@ export const Container = styled.div`
                 margin: 25px 0;
                 gap: 10px;
 
-                input {
-                    background: var(--INPUT_BG);
-                    border: 1.5px solid var(--INPUT_BORDER);
-                    color: var(--PRIMARY_FONT_COLOR);
-                    padding: 16px 20px;
-                    border-radius: 4px;
-                    
-                    &::placeholder {
-                        font-family: 'Inter', sans-serif;
-                        font-weight: 400;
-                        color: var(--INPUT_PLACEHOLDER_TXT)
-                    }
-
-                    :focus {
-                        outline: 1px solid var(--BUTTON_BG);
-                    }
-
-                    :autofill {
-                        background-color: tomato !important;
-                    }
-
-                    :-webkit-autofill {
-                        -webkit-box-shadow: 0 0 0 30px var(--INPUT_BG) inset !important;
-                    }
-
-                    :-webkit-autofill{
-                        -webkit-text-fill-color: var(--PRIMARY_FONT_COLOR) !important;
-                    }
-                }
-
-
                 button {
                     border-radius: 4px;
                     cursor: pointer;

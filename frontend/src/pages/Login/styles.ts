@@ -66,24 +66,6 @@ export const Container = styled.div`
                 margin: 25px 0;
                 gap: 10px;
 
-                input {
-                    background: var(--INPUT_BG);
-                    border: 1.5px solid var(--INPUT_BORDER);
-                    padding: 16px 20px;
-                    border-radius: 4px;
-                    color: var(--PRIMARY_FONT_COLOR);
-                    
-                    &::placeholder {
-                        font-family: 'Inter', sans-serif;
-                        font-weight: 400;
-                        color: var(--INPUT_PLACEHOLDER_TXT)
-                    }
-
-                    :focus {
-                        outline: 1px solid var(--BUTTON_BG);
-                    }
-                }
-
                 button {
                     display: flex;
                     align-items: center;
