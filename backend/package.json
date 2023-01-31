@@ -12,7 +12,7 @@
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "tsc",
+		"build": "npm install && tsc",
 		"dev": "ts-node-dev src/server.ts",
 		"start": "node ./dist/app.js"
 	},
