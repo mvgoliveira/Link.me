@@ -102,12 +102,14 @@ class UserService {
             throw new Error("Usuário não existe");
         }
 
-        userExists = await prisma.user.findUnique({
-            where: { email }
-        })
-
-        if (userExists?.email === email) {
-            throw new Error("Email já cadastrado");
+        if (email) {
+            userExists = await prisma.user.findUnique({
+                where: { email }
+            })
+    
+            if (userExists?.email === email) {
+                throw new Error("Email já cadastrado");
+            }
         }
 
         let newData = {};
