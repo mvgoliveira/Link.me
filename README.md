@@ -6,7 +6,7 @@ Link.me é uma aplicação Web de gerenciamento e compartilhamento de links no e
 
 ### :man_technologist: Sobre a aplicação
 
-[A aplicação](https://link-me-sqr.netlify.app/) conta com um sistema de autenticação, criação, edição e removão de links, controle de acesso de usuários, e compartilhamento de páginas de links através do nome de usuário.
+[A aplicação](https://linkeer.me/) conta com um sistema de autenticação, criação, edição e removão de links, controle de acesso de usuários, e compartilhamento de páginas de links através do nome de usuário.
 
 Este projeto usa as seguintes tecnologias:
 
