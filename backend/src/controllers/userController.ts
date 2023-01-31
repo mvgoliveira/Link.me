@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserService } from "../services/UserService";
+import { UserService } from "../services/userService";
 
 class UserController {
     async getUserData(req: Request, res: Response) {
@@ -39,7 +39,6 @@ class UserController {
         const {username} = req.params;
         
         const {
-            username: newUsername,
             email,
             password,
             confirmPassword,

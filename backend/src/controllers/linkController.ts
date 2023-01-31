@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { LinkService } from "../services/LinkService";
+import { LinkService } from "../services/linkService";
 
 class LinkController {
     async getFromUser(req: Request, res: Response) {
