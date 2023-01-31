@@ -7,6 +7,7 @@
 		"node": "16.14.0"
 	},
 	"compilerOptions": {
+		"moduleResolution": "node",
 		"allowJs": true,
 		"noImplicitAny": true,
 		"esModuleInterop": true,

@@ -9,5 +9,6 @@
 		"lib": ["esnext"],
 		"esModuleInterop": true,
 		"typeRoots": ["node_modules/yup"]
-	}
+	},
+	"include": ["src/**/*.ts"]
 }
