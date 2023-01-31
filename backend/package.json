@@ -7,13 +7,14 @@
 		"node": "16.14.0"
 	},
 	"compilerOptions": {
-        "moduleResolution": "node"
-    },
+		"esModuleInterop": true,
+		"outDir": "./dist"
+	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "npm install && tsc",
 		"dev": "ts-node-dev src/server.ts",
-		"start": "ts-node-dev src/server.ts"
+		"start": "node ./dist/application.js"
 	},
 	"keywords": [],
 	"author": "",
