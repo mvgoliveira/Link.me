@@ -27,7 +27,7 @@ function Input({Icon, placeholder, id, onCLick, type, value, onChange, onBlur, o
 				type={type}
 				id={id}
 				placeholder={placeholder}
-				value={value}
+				value={value ? value : ""}
 				onChange={onChange}
 				onBlur={onBlur}
 				onFocus={onFocus}

@@ -137,8 +137,8 @@ function LinkAdmCard({link, username}: PropsType) {
 
             {isDeleting ? (
                 <section className="buttonsContainer">
-                    <button onClick={() => setIsDeleting(false)}>Não</button>
-                    <button onClick={handleDelete}>Sim</button>
+                    <button type="button" onClick={() => setIsDeleting(false)}>Não</button>
+                    <button type="button" onClick={handleDelete}>Sim</button>
                 </section>
             ) : (
                 <FaTrash onClick={handleDelete}/>
