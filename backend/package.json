@@ -7,6 +7,8 @@
 		"node": "16.14.0"
 	},
 	"compilerOptions": {
+		"allowJs": true,
+		"noImplicitAny": true,
 		"esModuleInterop": true,
 		"outDir": "./dist"
 	},
