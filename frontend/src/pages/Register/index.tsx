@@ -7,7 +7,7 @@ import { Container } from "./styles";
 import { ErrorNotification } from "../../components/ErrorNotification";
 
 function Register() {
-	document.title = 'Login - Link.me';
+	document.title = 'Cadastro - Link.me';
 	const navigate = useNavigate();
 
 	const [username, setUsername] = useState("");

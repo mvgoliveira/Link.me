@@ -74,6 +74,16 @@ export const GlobalStyle = createGlobalStyle`
         background: #c4c4c4;
     }
 
+    input {
+        :-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px var(--INPUT_BG) inset !important;
+        }
+
+        :-webkit-autofill{
+            -webkit-text-fill-color: var(--PRIMARY_FONT_COLOR) !important;
+        }
+    }
+
     :root {
         
         --BG_CARD: #160B36;

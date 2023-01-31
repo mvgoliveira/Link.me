@@ -12,6 +12,7 @@ import { ErrorNotification } from "../../components/ErrorNotification";
 import { Input } from "../../components/Input";
 
 function Profile() {
+	document.title = 'Perfil - Link.me';
     const navigate = useNavigate();
     const { user, signOut } = useAuth();
 

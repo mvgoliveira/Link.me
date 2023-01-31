@@ -22,6 +22,8 @@ type LinkType = {
 }
 
 function Admin() {
+    document.title = 'Dashboard - Link.me';
+
     const navigate = useNavigate();
     const {user} = useAuth();
     

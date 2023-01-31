@@ -25,6 +25,7 @@ type LinkType = {
 
 function Home() {
     const { username } = useParams();
+    document.title = `${username} - Link.me`;
 
     const [user, setUser] = useState<UserType | null>(null);
     const [links, setLinks] = useState<[LinkType] | null>(null);
@@ -57,7 +58,7 @@ function Home() {
                             )}
                         </div>
 
-                        <span>@mvgoliveira</span>
+                        <span>@{username}</span>
                     </section>
 
                     <section className="contacts">

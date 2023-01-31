@@ -88,7 +88,12 @@ export const Container = styled.div<ContainerPropsType>`
             
             img {
                 border-radius: 100%;
+                
+                :hover {
+                    filter: brightness(0.93);
+                }
             }
+
         }
 
         .profileMenuContainer{
