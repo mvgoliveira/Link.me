@@ -176,6 +176,7 @@ export const Container = styled.div`
             }
     
             img {
+                cursor: pointer;
                 width: 230px;
                 height: fit-content;
                 padding-right: 15px;

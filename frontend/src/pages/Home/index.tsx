@@ -107,7 +107,7 @@ function Home() {
             
             <section className="bottom">
                 <article className="footer">
-                    <img src="./logo.svg" alt="Link.me logo" />
+                    <img src="./logo.svg" alt="Link.me logo" onClick={() => navigate('/')}/>
                     <p>Made with <AiFillHeart color="var(--GREEN)"/> by Marcus Oliveira</p>
                 </article>
             </section>
