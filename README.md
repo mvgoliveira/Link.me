@@ -21,7 +21,7 @@ Este projeto usa as seguintes tecnologias:
 
 ---
 
-### 📁 Instalação
+### 📁 Instalação e execução
 
 ```bash
   #  clone o repositório
