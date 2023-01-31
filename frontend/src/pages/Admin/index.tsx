@@ -133,11 +133,11 @@ function Admin() {
                     <Header username={user.username}/>
         
                     <section className="content">
-                        <article className="linkContainer">
+                        <form className="linkContainer">
                             {links?.map(link => (
                                 <LinkAdmCard key={link.id} link={link} username={user.username}/>
                             ))}
-                        </article>
+                        </form>
         
                         <Menu isAddNewLinkActive={isAddNewLinkActive}>
                             <div className="upper">

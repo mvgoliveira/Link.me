@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill } from "react-icons/ri";
+import {AiFillHeart} from "react-icons/ai";
 import { HiLink } from "react-icons/hi";
 
 import { ErrorNotification } from "../../components/ErrorNotification";
@@ -49,43 +50,51 @@ function Home() {
 
     return (
         <Container>
-            {user && (
-                <>
-                    <section className="profile">
-                        <div className="profileImg">
-                            {user.image_url && (
-                                <img src={user.image_url} alt="user image" />
-                            )}
-                        </div>
+            <section className="upper">
+                {user && (
+                    <>
+                        <article className="profile">
+                            <div className="profileImg">
+                                {user.image_url && (
+                                    <img src={user.image_url} alt="user image" />
+                                )}
+                            </div>
 
-                        <span>@{username}</span>
-                    </section>
+                            <span>@{username}</span>
+                        </article>
 
-                    <section className="contacts">
-                       <>
-                            {user.linkedin_url && <button type="button" onClick={()=> window.open(`${user.linkedin_url}`,'_blank')}> <RiLinkedinFill/> </button>}
-                            {user.facebook_url && <button type="button" onClick={()=> window.open(`${user.facebook_url}`,'_blank')}> <RiFacebookCircleFill/> </button>}
-                            {user.instagram_url && <button type="button" onClick={()=> window.open(`${user.instagram_url}`,'_blank')}> <RiInstagramFill/> </button>}
-                       </>
-                    </section>
-                </>
-            )}
+                        <article className="contacts">
+                        <>
+                                {user.linkedin_url && <button type="button" onClick={()=> window.open(`${user.linkedin_url}`,'_blank')}> <RiLinkedinFill/> </button>}
+                                {user.facebook_url && <button type="button" onClick={()=> window.open(`${user.facebook_url}`,'_blank')}> <RiFacebookCircleFill/> </button>}
+                                {user.instagram_url && <button type="button" onClick={()=> window.open(`${user.instagram_url}`,'_blank')}> <RiInstagramFill/> </button>}
+                        </>
+                        </article>
+                    </>
+                )}
 
-            {links && (
-                <LinksContainer>
-                    {links.map(link => (
-                        <button type="button" className="link" key={link.id} onClick={()=> window.open(`${link.url}`,'_blank')}>
-                            <HiLink/>
-                            <p>{link.title}</p>
-                        </button>
-                    ))}
-                    
-                </LinksContainer>
-            )}
+                {links && (
+                    <LinksContainer>
+                        {links.map(link => (
+                            <button type="button" className="link" key={link.id} onClick={()=> window.open(`${link.url}`,'_blank')}>
+                                <HiLink/>
+                                <p>{link.title}</p>
+                            </button>
+                        ))}
+                    </LinksContainer>
+                )}
 
-            {error && (
-                <ErrorNotification error={error}/>
-            )}
+                {error && (
+                    <ErrorNotification error={error}/>
+                )}
+            </section>
+            
+            <section className="bottom">
+                <article className="footer">
+                    <img src="./logo.svg" alt="Link.me logo" />
+                    <p>Made with <AiFillHeart color="var(--GREEN)"/> by Marcus Oliveira</p>
+                </article>
+            </section>
         </Container>
     )
 }
