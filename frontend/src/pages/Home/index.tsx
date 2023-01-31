@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { RiInstagramFill, RiLinkedinFill, RiFacebookCircleFill } from "react-icons/ri";
@@ -8,6 +8,7 @@ import { HiLink } from "react-icons/hi";
 import { ErrorNotification } from "../../components/ErrorNotification";
 import { Container, LinksContainer } from "./styles";
 import { api } from "../../services/api";
+import { useAuth } from "../../hooks/useAuth";
 
 type UserType = {
     username: string;
@@ -25,7 +26,11 @@ type LinkType = {
 }
 
 function Home() {
+    const navigate = useNavigate();
+
     const { username } = useParams();
+    const { user: loggedUser } = useAuth();
+
     document.title = `${username} - Link.me`;
 
     const [user, setUser] = useState<UserType | null>(null);
@@ -64,12 +69,23 @@ function Home() {
                         </article>
 
                         <article className="contacts">
-                        <>
+                            <>
                                 {user.linkedin_url && <button type="button" onClick={()=> window.open(`${user.linkedin_url}`,'_blank')}> <RiLinkedinFill/> </button>}
                                 {user.facebook_url && <button type="button" onClick={()=> window.open(`${user.facebook_url}`,'_blank')}> <RiFacebookCircleFill/> </button>}
                                 {user.instagram_url && <button type="button" onClick={()=> window.open(`${user.instagram_url}`,'_blank')}> <RiInstagramFill/> </button>}
-                        </>
+                            </>
                         </article>
+                        
+                        {user.username === loggedUser?.username && (
+                            <article className="adminMessage">
+                                <div className="adminMessageTexts">
+                                    <span>Vista do convidado</span>
+                                    <p>Deseja editar seus links?</p>
+                                </div>
+
+                                <button onClick={() => navigate('/admin')}>Ir para a tela do administrador</button>
+                            </article>
+                        )}
                     </>
                 )}
 

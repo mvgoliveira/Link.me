@@ -102,6 +102,7 @@ export const GlobalStyle = createGlobalStyle`
         --INPUT_PLACEHOLDER_TXT: #9993A8;
         
         --LINK_GLASS_BG: linear-gradient(212.1deg, #2C1D60 0%, #221154 40%, #25135D 60%, #2E1B5F 100%);
+        --LINK_BLACK_GLASS_BG: linear-gradient(212.1deg, #1A0F39 0%, #160B38 40%, #190D3E 60%, #1D0F40 100%);
         --HOME_GLASS_BG: linear-gradient(212.1deg, #100927 0%, #140A31 20%, #1E1049 40%, #160B37 60%, #12092F 80%, #190C41 100%);
 
         --toastify-color-light: #221154;

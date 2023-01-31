@@ -89,6 +89,64 @@ export const Container = styled.div`
                 }
             }
         }
+
+        .adminMessage {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--LINK_BLACK_GLASS_BG);
+            padding: 30px;
+            width: 440px;
+            margin-top: 60px;
+
+            @media(max-width: 530px) {
+                width: calc(90% - 60px);
+            }
+
+            .adminMessageTexts {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                span {
+                    font-weight: 700;
+                    font-size: 1rem;
+                    
+                    @media(max-width: 530px) {
+                        font-size: 0.9rem;
+                    }
+                }
+
+                p {
+                    font-size: 0.75rem;
+                    font-weight: 400;
+                    color: var(--SECONDARY_FONT_COLOR);
+
+                    @media(max-width: 530px) {
+                        font-size: 0.7rem;
+                    }
+                }
+            }
+
+            button {
+                cursor: pointer;
+                border: none;
+                background: var(--SECONDARY_BUTTON_BG);
+                font-size: 0.8rem;
+                font-weight: 700;
+                padding: 15px;
+                color: var(--PRIMARY_FONT_COLOR);
+
+                @media(max-width: 530px) {
+                    font-size: 0.7rem;
+                    width: 150px;
+                }
+
+                &:hover {
+                    filter: brightness(0.92);
+                }
+            }
+        }
     }
 
     .bottom {
