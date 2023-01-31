@@ -42,8 +42,8 @@ Este projeto usa as seguintes tecnologias:
   yarn dev [no backend]
 ```
 
-É necessário adicionar as variáveis ambientes TOKEN_SECRET [no frontend], MONGO_URL e TOKEN_SECRET [no backend].
-as variáveis TOKEN_SECRET são usados pelo jwt para assinar e verificar os tokens de autenticação e a variável MONGO_URL é usado pelo mongoose para efetuar a conexão com o mongodb.
+É necessário adicionar as variáveis ambientes VITE_TOKEN_SECRET e VITE_API_URL, DATABASE_URL e TOKEN_SECRET.
+As variáveis TOKEN_SECRET e VITE_TOKEN_SECRET são usados para assinar e verificar os tokens de autenticação JWT, VITE_API_URL é a URL da api (http://localhost:5000 no caso de ser executado localmente), e a variável DATABASE_URL é usado pelo prisma para efetuar a conexão com o banco de dados PostgreSQL.
 
 <hr>
 
